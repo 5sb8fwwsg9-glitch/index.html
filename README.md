@@ -2,12 +2,17 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0,
+               maximum-scale=1.0, user-scalable=no">
 
 <title>JARVIS VISION</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+    box-sizing:border-box;
+}
 
 html,body{
     margin:0;
@@ -19,57 +24,120 @@ html,body{
     color:#00d9ff;
 }
 
+
+/* =====================================================
+   CÁMARA
+===================================================== */
+
 #camera{
     position:fixed;
     inset:0;
+
     width:100%;
     height:100%;
+
     object-fit:cover;
+
+    /*
+       Azul futurista SIN invertir los colores.
+    */
+
     filter:
-        contrast(1.25)
-        brightness(.75)
-        saturate(.7)
-        hue-rotate(150deg);
+        grayscale(100%)
+        contrast(125%)
+        brightness(85%)
+        sepia(100%)
+        hue-rotate(165deg)
+        saturate(500%);
 }
+
+
+/* =====================================================
+   CANVAS DE DETECCIÓN
+===================================================== */
+
+#detectionCanvas{
+    position:fixed;
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    pointer-events:none;
+}
+
+
+/* =====================================================
+   HUD
+===================================================== */
 
 #hud{
     position:fixed;
     inset:0;
+
     pointer-events:none;
 }
 
+
+/* =====================================================
+   TÍTULO
+===================================================== */
+
 #title{
     position:absolute;
+
     top:18px;
     left:50%;
+
     transform:translateX(-50%);
+
     text-align:center;
-    text-shadow:0 0 12px #00bfff;
+
+    text-shadow:
+        0 0 8px #00c8ff,
+        0 0 20px #008cff;
 }
 
 #title b{
-    font-size:25px;
+    font-size:24px;
     letter-spacing:5px;
 }
 
 #title small{
     display:block;
+
     margin-top:4px;
-    opacity:.7;
-    letter-spacing:2px;
+
+    font-size:10px;
+
+    letter-spacing:3px;
+
+    opacity:.8;
 }
+
+
+/* =====================================================
+   ESQUINAS HUD
+===================================================== */
 
 .corner{
     position:absolute;
-    width:60px;
-    height:60px;
-    border-color:#00cfff;
-    filter:drop-shadow(0 0 8px #00cfff);
+
+    width:65px;
+    height:65px;
+
+    border-color:#00d9ff;
+
+    filter:
+        drop-shadow(
+            0 0 8px #00c8ff
+        );
 }
 
 .tl{
     top:15px;
     left:15px;
+
     border-top:2px solid;
     border-left:2px solid;
 }
@@ -77,6 +145,7 @@ html,body{
 .tr{
     top:15px;
     right:15px;
+
     border-top:2px solid;
     border-right:2px solid;
 }
@@ -84,6 +153,7 @@ html,body{
 .bl{
     bottom:15px;
     left:15px;
+
     border-bottom:2px solid;
     border-left:2px solid;
 }
@@ -91,176 +161,648 @@ html,body{
 .br{
     bottom:15px;
     right:15px;
+
     border-bottom:2px solid;
     border-right:2px solid;
 }
 
+
+/* =====================================================
+   ESCÁNER
+===================================================== */
+
 #scan{
     position:absolute;
+
+    left:0;
+
     width:100%;
     height:2px;
+
     background:#00d9ff;
-    opacity:.3;
-    box-shadow:0 0 15px #00d9ff;
-    animation:scan 4s linear infinite;
+
+    opacity:.25;
+
+    box-shadow:
+        0 0 15px #00d9ff;
+
+    animation:
+        scan 4s linear infinite;
 }
 
 @keyframes scan{
-    from{top:0}
-    to{top:100%}
+
+    from{
+        top:0;
+    }
+
+    to{
+        top:100%;
+    }
+
 }
 
-#objects{
+
+/* =====================================================
+   PANEL JARVIS
+===================================================== */
+
+#jarvisPanel{
+
     position:absolute;
-    top:85px;
-    right:12px;
-    width:190px;
-    max-height:50%;
-    overflow:auto;
+
+    left:18px;
+    bottom:18px;
+
+    width:280px;
+
+    padding:12px;
+
+    background:
+        rgba(0,15,30,.78);
+
+    border-left:
+        3px solid #00d9ff;
+
+    box-shadow:
+        0 0 20px
+        rgba(0,180,255,.25);
+
+    backdrop-filter:
+        blur(5px);
 }
 
-.object{
-    margin-bottom:7px;
-    padding:8px;
-    background:rgba(0,20,40,.75);
-    border:1px solid rgba(0,210,255,.7);
-    box-shadow:0 0 10px rgba(0,180,255,.25);
-    font-size:11px;
-    text-shadow:0 0 5px #00bfff;
-}
+#jarvisTitle{
 
-#bottom{
-    position:absolute;
-    bottom:20px;
-    left:20px;
-    right:20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:end;
-}
+    font-size:14px;
 
-#jarvis{
-    padding:10px 14px;
-    background:rgba(0,20,35,.7);
-    border-left:3px solid #00d9ff;
-    max-width:270px;
-}
+    font-weight:bold;
 
-#jarvis b{
-    font-size:13px;
+    letter-spacing:2px;
 }
 
 #message{
-    margin-top:5px;
+
+    margin-top:6px;
+
     font-size:11px;
+
+    line-height:1.4;
+
+    min-height:30px;
 }
+
+
+/* =====================================================
+   ESTADO
+===================================================== */
 
 #status{
+
+    position:absolute;
+
+    right:18px;
+    bottom:18px;
+
     text-align:right;
+
     font-size:11px;
+
     line-height:1.7;
-    text-shadow:0 0 8px #00cfff;
+
+    text-shadow:
+        0 0 8px #00c8ff;
 }
+
+
+/* =====================================================
+   BOTÓN
+===================================================== */
 
 button{
+
     pointer-events:auto;
+
     margin-top:8px;
-    padding:10px 14px;
-    background:rgba(0,40,70,.8);
-    color:#00d9ff;
-    border:1px solid #00d9ff;
-    font-family:monospace;
+
+    padding:9px 13px;
+
+    background:
+        rgba(0,40,70,.85);
+
+    border:
+        1px solid #00d9ff;
+
     border-radius:5px;
+
+    color:#00d9ff;
+
+    font-family:monospace;
+
+    font-size:11px;
+
+    box-shadow:
+        0 0 10px
+        rgba(0,180,255,.3);
 }
+
+button:active{
+
+    background:
+        rgba(0,120,180,.7);
+}
+
+
+/* =====================================================
+   BOTÓN ACTIVAR
+===================================================== */
 
 #start{
+
     position:fixed;
-    z-index:20;
+
+    z-index:50;
+
     left:50%;
     top:50%;
-    transform:translate(-50%,-50%);
-    padding:18px 25px;
+
+    transform:
+        translate(-50%,-50%);
+
+    padding:18px 26px;
+
     font-size:16px;
-    background:rgba(0,15,30,.95);
-    box-shadow:0 0 25px #008cff;
+
+    background:
+        rgba(0,10,25,.95);
+
+    box-shadow:
+        0 0 25px #008cff,
+        0 0 60px
+        rgba(0,150,255,.25);
 }
 
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
 @media(max-width:600px){
-    #title b{font-size:18px}
-    #objects{width:165px}
-    #bottom{left:12px;right:12px}
+
+    #title b{
+        font-size:18px;
+    }
+
+    #jarvisPanel{
+
+        left:10px;
+        bottom:10px;
+
+        width:230px;
+    }
+
+    #status{
+
+        right:10px;
+        bottom:10px;
+
+        font-size:9px;
+    }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
-<video id="camera" autoplay playsinline muted></video>
+
+<!-- ===================================================
+     CÁMARA
+=================================================== -->
+
+<video
+    id="camera"
+    autoplay
+    playsinline
+    muted>
+</video>
+
+
+<!-- ===================================================
+     CANVAS
+=================================================== -->
+
+<canvas
+    id="detectionCanvas">
+</canvas>
+
+
+<!-- ===================================================
+     HUD
+=================================================== -->
 
 <div id="hud">
 
-<div id="scan"></div>
+    <div id="scan"></div>
 
-<div class="corner tl"></div>
-<div class="corner tr"></div>
-<div class="corner bl"></div>
-<div class="corner br"></div>
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
 
-<div id="title">
-    <b>J.A.R.V.I.S.</b>
-    <small>VISION SYSTEM</small>
-</div>
 
-<div id="objects"></div>
+    <div id="title">
 
-<div id="bottom">
+        <b>J.A.R.V.I.S.</b>
 
-<div id="jarvis">
-    <b>JARVIS</b>
-    <div id="message">
-        Sistema preparado.
+        <small>
+            ADVANCED VISION SYSTEM
+        </small>
+
     </div>
 
-    <button onclick="voice()">
-        🎙 HABLAR CON JARVIS
-    </button>
+
+    <!-- JARVIS -->
+
+    <div id="jarvisPanel">
+
+        <div id="jarvisTitle">
+            JARVIS
+        </div>
+
+        <div id="message">
+            Sistema preparado.
+        </div>
+
+        <button
+            id="voiceButton">
+            🎙 HABLAR CON JARVIS
+        </button>
+
+    </div>
+
+
+    <!-- ESTADO -->
+
+    <div id="status">
+
+        SISTEMA:
+        <span id="system">
+            ONLINE
+        </span>
+
+        <br>
+
+        CÁMARA:
+        <span id="cameraStatus">
+            OFF
+        </span>
+
+        <br>
+
+        IA:
+        <span id="aiStatus">
+            CARGANDO
+        </span>
+
+        <br>
+
+        OBJETOS:
+        <span id="objectCount">
+            0
+        </span>
+
+        <br>
+
+        VOZ:
+        <span id="voiceStatus">
+            OFF
+        </span>
+
+    </div>
+
 </div>
 
-<div id="status">
-    SISTEMA: ONLINE<br>
-    CÁMARA: <span id="camStatus">OFF</span><br>
-    OBJETOS: <span id="count">0</span><br>
-    VOZ: <span id="voiceStatus">OFF</span>
-</div>
 
-</div>
-</div>
+<!-- ===================================================
+     BOTÓN
+=================================================== -->
 
 <button id="start">
-    ACTIVAR CÁMARA
+    ACTIVAR JARVIS
 </button>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<!-- ===================================================
+     TENSORFLOW
+=================================================== -->
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+<script src=
+"https://cdn.jsdelivr.net/npm/@tensorflow/tfjs">
+</script>
+
+<script src=
+"https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd">
+</script>
 
 
 <script>
 
-let video =
-    document.getElementById("camera");
+/* =====================================================
+   VARIABLES
+===================================================== */
 
-let model;
+const video =
+    document.getElementById(
+        "camera"
+    );
 
-let active=false;
+const canvas =
+    document.getElementById(
+        "detectionCanvas"
+    );
 
-let lastObjects=[];
+const ctx =
+    canvas.getContext("2d");
+
+const startButton =
+    document.getElementById(
+        "start"
+    );
+
+const message =
+    document.getElementById(
+        "message"
+    );
+
+const objectCount =
+    document.getElementById(
+        "objectCount"
+    );
+
+const aiStatus =
+    document.getElementById(
+        "aiStatus"
+    );
+
+const cameraStatus =
+    document.getElementById(
+        "cameraStatus"
+    );
+
+const voiceStatus =
+    document.getElementById(
+        "voiceStatus"
+    );
 
 
-// ======================================
-// ACTIVAR CÁMARA
-// ======================================
+let model = null;
+
+let active = false;
+
+let detections = [];
+
+let detecting = false;
+
+
+/* =====================================================
+   ALTURAS DE REFERENCIA
+===================================================== */
+
+const objectHeights = {
+
+    person:1.70,
+
+    bicycle:1.05,
+
+    car:1.50,
+
+    motorcycle:1.10,
+
+    bus:3.20,
+
+    truck:2.50,
+
+    chair:.90,
+
+    couch:.80,
+
+    table:.75,
+
+    bottle:.25,
+
+    cup:.12,
+
+    laptop:.25,
+
+    tv:.70,
+
+    backpack:.45,
+
+    suitcase:.70,
+
+    dog:.60,
+
+    cat:.30,
+
+    horse:1.50,
+
+    cow:1.40,
+
+    sheep:.80,
+
+    bird:.25,
+
+    book:.25,
+
+    keyboard:.04,
+
+    cell_phone:.15,
+
+    microwave:.35,
+
+    refrigerator:1.70
+
+};
+
+
+/* =====================================================
+   NOMBRES EN ESPAÑOL
+===================================================== */
+
+const spanish = {
+
+    person:"persona",
+
+    bicycle:"bicicleta",
+
+    car:"auto",
+
+    motorcycle:"motocicleta",
+
+    airplane:"avión",
+
+    bus:"autobús",
+
+    train:"tren",
+
+    truck:"camión",
+
+    boat:"barco",
+
+    traffic_light:"semáforo",
+
+    stop_sign:"señal de stop",
+
+    bench:"banco",
+
+    bird:"pájaro",
+
+    cat:"gato",
+
+    dog:"perro",
+
+    horse:"caballo",
+
+    sheep:"oveja",
+
+    cow:"vaca",
+
+    elephant:"elefante",
+
+    bear:"oso",
+
+    zebra:"cebra",
+
+    giraffe:"jirafa",
+
+    backpack:"mochila",
+
+    umbrella:"paraguas",
+
+    handbag:"bolso",
+
+    suitcase:"maleta",
+
+    frisbee:"frisbee",
+
+    skis:"esquís",
+
+    snowboard:"snowboard",
+
+    sports_ball:"pelota",
+
+    kite:"cometa",
+
+    skateboard:"skateboard",
+
+    bottle:"botella",
+
+    wine_glass:"copa",
+
+    cup:"taza",
+
+    fork:"tenedor",
+
+    knife:"cuchillo",
+
+    spoon:"cuchara",
+
+    bowl:"tazón",
+
+    banana:"banana",
+
+    apple:"manzana",
+
+    sandwich:"sándwich",
+
+    orange:"naranja",
+
+    broccoli:"brócoli",
+
+    carrot:"zanahoria",
+
+    pizza:"pizza",
+
+    donut:"donut",
+
+    cake:"pastel",
+
+    chair:"silla",
+
+    couch:"sofá",
+
+    potted_plant:"planta",
+
+    bed:"cama",
+
+    dining_table:"mesa",
+
+    toilet:"inodoro",
+
+    tv:"televisor",
+
+    laptop:"computadora",
+
+    mouse:"ratón",
+
+    remote:"control",
+
+    keyboard:"teclado",
+
+    cell_phone:"teléfono",
+
+    microwave:"microondas",
+
+    oven:"horno",
+
+    toaster:"tostadora",
+
+    sink:"fregadero",
+
+    refrigerator:"refrigerador",
+
+    book:"libro",
+
+    clock:"reloj",
+
+    vase:"florero",
+
+    scissors:"tijeras",
+
+    teddy_bear:"oso de peluche",
+
+    toothbrush:"cepillo de dientes"
+
+};
+
+
+/* =====================================================
+   REDIMENSIONAR CANVAS
+===================================================== */
+
+function resizeCanvas(){
+
+    canvas.width =
+        video.videoWidth ||
+        window.innerWidth;
+
+    canvas.height =
+        video.videoHeight ||
+        window.innerHeight;
+}
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+
+/* =====================================================
+   ACTIVAR CÁMARA
+===================================================== */
 
 async function startCamera(){
 
@@ -287,238 +829,187 @@ async function startCamera(){
                 audio:false
             });
 
-        video.srcObject=stream;
+
+        video.srcObject =
+            stream;
+
 
         await video.play();
 
-        document.getElementById("start")
-        .style.display="none";
 
-        document.getElementById("camStatus")
-        .textContent="ON";
+        resizeCanvas();
 
-        active=true;
 
-        jarvisSay(
-            "Cámara activada. "
-            +"Sistema de visión operativo."
+        active = true;
+
+
+        startButton.style.display =
+            "none";
+
+
+        cameraStatus.textContent =
+            "ON";
+
+
+        message.textContent =
+            "Cámara activada. Iniciando inteligencia visual...";
+
+
+        loadAI();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        message.textContent =
+            "No se pudo acceder a la cámara.";
+
+        alert(
+            "Permite el acceso a la cámara para utilizar JARVIS."
         );
+    }
+}
+
+
+/* =====================================================
+   CARGAR IA
+===================================================== */
+
+async function loadAI(){
+
+    try{
+
+        aiStatus.textContent =
+            "CARGANDO";
+
 
         model =
             await cocoSsd.load();
 
-        detect();
+
+        aiStatus.textContent =
+            "ONLINE";
+
+
+        message.textContent =
+            "Inteligencia visual activada.";
+
+
+        speak(
+            "Sistema de visión activado."
+        );
+
+
+        detectLoop();
 
     }
 
     catch(error){
 
-        alert(
-            "No se pudo acceder a la cámara. "
-            +"Debes permitir el acceso a la cámara."
-        );
+        console.error(error);
 
-        console.log(error);
+        aiStatus.textContent =
+            "ERROR";
+
+        message.textContent =
+            "No se pudo cargar el sistema de inteligencia artificial.";
     }
 }
 
 
-// ======================================
-// DETECCIÓN
-// ======================================
+/* =====================================================
+   DETECCIÓN
+===================================================== */
 
-async function detect(){
+async function detectLoop(){
 
-    if(!active || !model){
+    if(
+        !active ||
+        !model ||
+        detecting
+    ){
 
-        requestAnimationFrame(detect);
+        requestAnimationFrame(
+            detectLoop
+        );
 
         return;
     }
 
+
+    detecting = true;
+
+
     try{
 
-        const predictions =
-            await model.detect(video);
+        detections =
+            await model.detect(
+                video
+            );
 
-        lastObjects =
-            predictions;
 
-        showObjects(
-            predictions
+        drawDetections(
+            detections
         );
 
     }
 
     catch(error){
 
-        console.log(error);
+        console.error(error);
     }
 
+
+    detecting = false;
+
+
     setTimeout(
-        detect,
-        300
+        detectLoop,
+        150
     );
 }
 
 
-// ======================================
-// MOSTRAR OBJETOS
-// ======================================
-
-function showObjects(objects){
-
-    const container =
-        document.getElementById(
-            "objects"
-        );
-
-    container.innerHTML="";
-
-    document.getElementById(
-        "count"
-    ).textContent=
-        objects.length;
-
-
-    objects.forEach(
-        function(obj){
-
-            let name =
-                translate(obj.class);
-
-            let width =
-                obj.bbox[2];
-
-            let height =
-                obj.bbox[3];
-
-
-            /*
-             * ESTIMACIÓN DE DISTANCIA
-             *
-             * No es una medición real.
-             * Depende del tamaño esperado
-             * del objeto.
-             */
-
-            let distance =
-                estimateDistance(
-                    obj.class,
-                    height
-                );
-
-
-            let estimatedHeight =
-                estimateHeight(
-                    obj.class,
-                    height,
-                    distance
-                );
-
-
-            let div =
-                document.createElement(
-                    "div"
-                );
-
-
-            div.className="object";
-
-
-            div.innerHTML=
-
-                "<b>"
-                +name.toUpperCase()
-                +"</b><br>"
-
-                +"CONFIANZA: "
-                +(obj.score*100)
-                .toFixed(0)
-                +"%<br>"
-
-                +"DISTANCIA: "
-                +distance
-                +" m<br>"
-
-                +"ALTURA EST.: "
-                +estimatedHeight
-                +" m";
-
-
-            container.appendChild(
-                div
-            );
-
-        }
-    );
-}
-
-
-// ======================================
-// ALTURAS DE REFERENCIA
-// ======================================
-
-const heights={
-
-    person:1.70,
-
-    car:1.50,
-
-    bicycle:1.05,
-
-    motorcycle:1.10,
-
-    bus:3.20,
-
-    truck:2.50,
-
-    chair:.90,
-
-    table:.75,
-
-    bottle:.25,
-
-    cup:.12,
-
-    laptop:.25,
-
-    tv:.70,
-
-    backpack:.45,
-
-    suitcase:.70,
-
-    dog:.60,
-
-    cat:.30
-
-};
-
-
-// ======================================
-// DISTANCIA APROXIMADA
-// ======================================
+/* =====================================================
+   DISTANCIA
+===================================================== */
 
 function estimateDistance(
     object,
     pixelHeight
 ){
 
-    let realHeight =
-        heights[object] || .5;
+    const realHeight =
+        objectHeights[object]
+        || .50;
 
-    if(pixelHeight<=0)
+
+    if(
+        pixelHeight <= 0
+    ){
+
         return 0;
+    }
+
 
     /*
-     * Focal aproximada.
-     */
+       Estimación visual.
 
-    let focal=700;
+       NO es LiDAR ni medición real.
+    */
+
+    const focal =
+        Math.max(
+            500,
+            video.videoWidth * .75
+        );
+
 
     let distance =
-        realHeight*focal/
+        realHeight *
+        focal /
         pixelHeight;
 
 
@@ -526,19 +1017,19 @@ function estimateDistance(
         Math.max(
             .2,
             Math.min(
-                20,
+                30,
                 distance
             )
         );
 
 
-    return distance.toFixed(1);
+    return distance;
 }
 
 
-// ======================================
-// ALTURA APROXIMADA
-// ======================================
+/* =====================================================
+   ALTURA
+===================================================== */
 
 function estimateHeight(
     object,
@@ -546,229 +1037,414 @@ function estimateHeight(
     distance
 ){
 
-    let focal=700;
-
-    let h =
-        pixelHeight*
-        parseFloat(distance)/
-        focal;
-
-
-    let reference =
-        heights[object] || .5;
-
-
-    /*
-     * Limitamos el resultado
-     * para evitar valores absurdos.
-     */
-
-    h =
+    const focal =
         Math.max(
-            .03,
-            Math.min(
-                4,
-                h
-            )
+            500,
+            video.videoWidth * .75
         );
 
 
-    return h.toFixed(2);
+    let height =
+        pixelHeight *
+        distance /
+        focal;
+
+
+    const reference =
+        objectHeights[object]
+        || .50;
+
+
+    /*
+       Para evitar resultados
+       completamente absurdos.
+    */
+
+    if(
+        object === "person"
+    ){
+
+        height =
+            Math.max(
+                1.0,
+                Math.min(
+                    2.3,
+                    height
+                )
+            );
+    }
+
+    else{
+
+        height =
+            Math.max(
+                .03,
+                Math.min(
+                    5,
+                    height
+                )
+            );
+    }
+
+
+    return height;
 }
 
 
-// ======================================
-// TRADUCIR NOMBRES
-// ======================================
+/* =====================================================
+   DIBUJAR CAJAS
+===================================================== */
 
-function translate(name){
+function drawDetections(
+    objects
+){
 
-    const names={
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
 
-        person:"persona",
 
-        bicycle:"bicicleta",
+    objectCount.textContent =
+        objects.length;
 
-        car:"auto",
 
-        motorcycle:"motocicleta",
+    objects.forEach(
+        function(obj){
 
-        airplane:"avión",
+            const [
+                x,
+                y,
+                w,
+                h
+            ] = obj.bbox;
 
-        bus:"autobús",
 
-        train:"tren",
+            const distance =
+                estimateDistance(
+                    obj.class,
+                    h
+                );
 
-        truck:"camión",
 
-        boat:"barco",
+            const height =
+                estimateHeight(
+                    obj.class,
+                    h,
+                    distance
+                );
 
-        traffic_light:
-            "semáforo",
 
-        fire_hydrant:
-            "hidrante",
+            const name =
+                spanish[obj.class]
+                || obj.class;
 
-        stop_sign:
-            "señal de stop",
 
-        parking_meter:
-            "parquímetro",
+            /* -------------------------------------
+               CAJA
+            ------------------------------------- */
 
-        bench:"banco",
+            ctx.strokeStyle =
+                "#00d9ff";
 
-        bird:"pájaro",
+            ctx.lineWidth = 3;
 
-        cat:"gato",
+            ctx.shadowBlur = 15;
 
-        dog:"perro",
+            ctx.shadowColor =
+                "#00bfff";
 
-        horse:"caballo",
 
-        sheep:"oveja",
+            ctx.strokeRect(
+                x,
+                y,
+                w,
+                h
+            );
 
-        cow:"vaca",
 
-        elephant:"elefante",
+            ctx.shadowBlur = 0;
 
-        bear:"oso",
 
-        zebra:"cebra",
+            /* -------------------------------------
+               ESQUINAS DE LA CAJA
+            ------------------------------------- */
 
-        giraffe:"jirafa",
+            const corner = 15;
 
-        backpack:"mochila",
 
-        umbrella:"paraguas",
+            ctx.strokeStyle =
+                "#ffffff";
 
-        handbag:"bolso",
+            ctx.lineWidth = 2;
 
-        suitcase:"maleta",
 
-        frisbee:"frisbee",
+            // esquina superior izquierda
 
-        skis:"esquís",
+            ctx.beginPath();
 
-        snowboard:
-            "snowboard",
+            ctx.moveTo(
+                x,
+                y + corner
+            );
 
-        sports_ball:
-            "pelota",
+            ctx.lineTo(
+                x,
+                y
+            );
 
-        kite:"cometa",
+            ctx.lineTo(
+                x + corner,
+                y
+            );
 
-        baseball_bat:
-            "bate",
+            ctx.stroke();
 
-        baseball_glove:
-            "guante",
 
-        skateboard:
-            "skateboard",
+            // esquina superior derecha
 
-        surfboard:
-            "tabla de surf",
+            ctx.beginPath();
 
-        bottle:"botella",
+            ctx.moveTo(
+                x+w-corner,
+                y
+            );
 
-        wine_glass:
-            "copa",
+            ctx.lineTo(
+                x+w,
+                y
+            );
 
-        cup:"taza",
+            ctx.lineTo(
+                x+w,
+                y+corner
+            );
 
-        fork:"tenedor",
+            ctx.stroke();
 
-        knife:"cuchillo",
 
-        spoon:"cuchara",
+            // esquina inferior izquierda
 
-        bowl:"tazón",
+            ctx.beginPath();
 
-        banana:"banana",
+            ctx.moveTo(
+                x,
+                y+h-corner
+            );
 
-        apple:"manzana",
+            ctx.lineTo(
+                x,
+                y+h
+            );
 
-        sandwich:"sándwich",
+            ctx.lineTo(
+                x+corner,
+                y+h
+            );
 
-        orange:"naranja",
+            ctx.stroke();
 
-        broccoli:"brócoli",
 
-        carrot:"zanahoria",
+            // esquina inferior derecha
 
-        pizza:"pizza",
+            ctx.beginPath();
 
-        donut:"donut",
+            ctx.moveTo(
+                x+w-corner,
+                y+h
+            );
 
-        cake:"pastel",
+            ctx.lineTo(
+                x+w,
+                y+h
+            );
 
-        chair:"silla",
+            ctx.lineTo(
+                x+w,
+                y+h-corner
+            );
 
-        couch:"sofá",
+            ctx.stroke();
 
-        potted_plant:
-            "planta",
 
-        bed:"cama",
+            /* -------------------------------------
+               PANEL DE INFORMACIÓN
+            ------------------------------------- */
 
-        dining_table:
-            "mesa",
+            const panelHeight =
+                82;
 
-        toilet:"inodoro",
 
-        tv:"televisor",
+            const panelWidth =
+                Math.max(
+                    180,
+                    Math.min(
+                        260,
+                        w
+                    )
+                );
 
-        laptop:"computadora",
 
-        mouse:"ratón",
+            let panelY =
+                y - panelHeight - 5;
 
-        remote:"control",
 
-        keyboard:"teclado",
+            if(
+                panelY < 5
+            ){
 
-        cell_phone:
-            "teléfono",
+                panelY =
+                    y + 5;
+            }
 
-        microwave:
-            "microondas",
 
-        oven:"horno",
+            /*
+               Fondo
+            */
 
-        toaster:"tostadora",
+            ctx.fillStyle =
+                "rgba(0,15,30,.88)";
 
-        sink:"fregadero",
 
-        refrigerator:
-            "refrigerador",
+            ctx.fillRect(
+                x,
+                panelY,
+                panelWidth,
+                panelHeight
+            );
 
-        book:"libro",
 
-        clock:"reloj",
+            /*
+               Borde
+            */
 
-        vase:"florero",
+            ctx.strokeStyle =
+                "#00d9ff";
 
-        scissors:"tijeras",
+            ctx.lineWidth = 1;
 
-        teddy_bear:
-            "oso de peluche",
 
-        hair_drier:
-            "secador",
+            ctx.strokeRect(
+                x,
+                panelY,
+                panelWidth,
+                panelHeight
+            );
 
-        toothbrush:
-            "cepillo de dientes"
-    };
 
+            /* -------------------------------------
+               TEXTO
+            ------------------------------------- */
 
-    return names[name] || name;
+            ctx.fillStyle =
+                "#00eaff";
+
+
+            ctx.font =
+                "bold 14px monospace";
+
+
+            ctx.fillText(
+                name.toUpperCase(),
+                x + 7,
+                panelY + 17
+            );
+
+
+            ctx.font =
+                "11px monospace";
+
+
+            ctx.fillText(
+                "CONFIANZA: " +
+                (obj.score*100)
+                .toFixed(0) +
+                "%",
+                x + 7,
+                panelY + 34
+            );
+
+
+            ctx.fillText(
+                "DISTANCIA: " +
+                distance.toFixed(1) +
+                " m",
+                x + 7,
+                panelY + 50
+            );
+
+
+            ctx.fillText(
+                "ALTURA EST.: " +
+                height.toFixed(2) +
+                " m",
+                x + 7,
+                panelY + 66
+            );
+
+        }
+    );
 }
 
 
-// ======================================
-// VOZ
-// ======================================
+/* =====================================================
+   VOZ
+===================================================== */
 
-function voice(){
+function speak(text){
+
+    if(
+        !("speechSynthesis"
+        in window)
+    ){
+
+        return;
+    }
+
+
+    speechSynthesis.cancel();
+
+
+    const utterance =
+        new SpeechSynthesisUtterance(
+            text
+        );
+
+
+    utterance.lang =
+        "es-ES";
+
+
+    utterance.rate =
+        .90;
+
+
+    /*
+       Voz más grave para darle
+       sensación de asistente.
+    */
+
+    utterance.pitch =
+        .72;
+
+
+    utterance.volume =
+        1;
+
+
+    speechSynthesis.speak(
+        utterance
+    );
+}
+
+
+/* =====================================================
+   RECONOCIMIENTO DE VOZ
+===================================================== */
+
+function listen(){
 
     const Recognition =
         window.SpeechRecognition ||
@@ -777,11 +1453,8 @@ function voice(){
 
     if(!Recognition){
 
-        jarvisSay(
-            "El reconocimiento de voz "
-            +"no está disponible "
-            +"en este navegador."
-        );
+        message.textContent =
+            "El navegador no permite reconocimiento de voz.";
 
         return;
     }
@@ -791,20 +1464,27 @@ function voice(){
         new Recognition();
 
 
-    recognition.lang="es-ES";
-
-    recognition.continuous=false;
-
-    recognition.interimResults=false;
+    recognition.lang =
+        "es-ES";
 
 
-    document.getElementById(
-        "voiceStatus"
-    ).textContent=
+    recognition.continuous =
+        false;
+
+
+    recognition.interimResults =
+        false;
+
+
+    voiceStatus.textContent =
         "ESCUCHANDO";
 
 
-    jarvisSay(
+    message.textContent =
+        "Te escucho.";
+
+
+    speak(
         "Te escucho."
     );
 
@@ -812,15 +1492,13 @@ function voice(){
     recognition.onresult =
         function(event){
 
-            let command =
+            const command =
                 event.results[0][0]
                 .transcript
                 .toLowerCase();
 
 
-            document.getElementById(
-                "voiceStatus"
-            ).textContent=
+            voiceStatus.textContent =
                 "ON";
 
 
@@ -833,9 +1511,18 @@ function voice(){
     recognition.onerror =
         function(){
 
-            document.getElementById(
-                "voiceStatus"
-            ).textContent=
+            voiceStatus.textContent =
+                "ERROR";
+
+            message.textContent =
+                "No pude entenderte.";
+        };
+
+
+    recognition.onend =
+        function(){
+
+            voiceStatus.textContent =
                 "OFF";
         };
 
@@ -844,152 +1531,340 @@ function voice(){
 }
 
 
-// ======================================
-// COMANDOS
-// ======================================
+/* =====================================================
+   COMANDOS JARVIS
+===================================================== */
 
-function processCommand(command){
+function processCommand(
+    command
+){
 
-    if(
-        command.includes("qué ves") ||
-        command.includes("que ves") ||
-        command.includes("objetos")
-    ){
-
-        describeObjects();
-
-        return;
-    }
+    console.log(
+        "Comando:",
+        command
+    );
 
 
-    if(
-        command.includes("cuántos") ||
-        command.includes("cuantos")
-    ){
-
-        jarvisSay(
-            "Actualmente detecto "
-            +lastObjects.length
-            +" objetos."
-        );
-
-        return;
-    }
-
+    /* -----------------------------------------------
+       SALUDO
+    ----------------------------------------------- */
 
     if(
-        command.includes("hola") ||
+        command.includes("hola")
+        ||
         command.includes("jarvis")
     ){
 
-        jarvisSay(
-            "Hola. Todos los sistemas "
-            +"funcionan correctamente."
-        );
+        const response =
+            "Hola. Todos los sistemas funcionan correctamente.";
+
+        message.textContent =
+            response;
+
+        speak(response);
 
         return;
     }
 
 
-    jarvisSay(
-        "He recibido tu comando."
-    );
+    /* -----------------------------------------------
+       QUÉ VES
+    ----------------------------------------------- */
+
+    if(
+        command.includes("qué ves")
+        ||
+        command.includes("que ves")
+        ||
+        command.includes("qué hay")
+        ||
+        command.includes("que hay")
+        ||
+        command.includes("describe")
+    ){
+
+        describeScene();
+
+        return;
+    }
+
+
+    /* -----------------------------------------------
+       CUÁNTOS OBJETOS
+    ----------------------------------------------- */
+
+    if(
+        command.includes("cuántos")
+        ||
+        command.includes("cuantos")
+    ){
+
+        const response =
+            "Detecto " +
+            detections.length +
+            " objetos.";
+
+        message.textContent =
+            response;
+
+        speak(response);
+
+        return;
+    }
+
+
+    /* -----------------------------------------------
+       ESTADO
+    ----------------------------------------------- */
+
+    if(
+        command.includes("estado")
+        ||
+        command.includes("sistemas")
+    ){
+
+        const response =
+            "Sistemas operativos. " +
+            "Cámara activa. " +
+            "Inteligencia visual funcionando.";
+
+        message.textContent =
+            response;
+
+        speak(response);
+
+        return;
+    }
+
+
+    /* -----------------------------------------------
+       OBJETO MÁS CERCANO
+    ----------------------------------------------- */
+
+    if(
+        command.includes("más cerca")
+        ||
+        command.includes("mas cerca")
+        ||
+        command.includes("cerca")
+    ){
+
+        closestObject();
+
+        return;
+    }
+
+
+    /* -----------------------------------------------
+       AYUDA
+    ----------------------------------------------- */
+
+    if(
+        command.includes("ayuda")
+        ||
+        command.includes("comandos")
+    ){
+
+        const response =
+            "Puedes preguntarme qué veo, " +
+            "cuántos objetos hay, " +
+            "cuál está más cerca o decir estado.";
+
+        message.textContent =
+            response;
+
+        speak(response);
+
+        return;
+    }
+
+
+    /* -----------------------------------------------
+       NO RECONOCIDO
+    ----------------------------------------------- */
+
+    const response =
+        "No tengo una respuesta configurada " +
+        "para ese comando.";
+
+    message.textContent =
+        response;
+
+    speak(response);
 }
 
 
-// ======================================
-// DESCRIBIR OBJETOS
-// ======================================
+/* =====================================================
+   DESCRIBIR ESCENA
+===================================================== */
 
-function describeObjects(){
+function describeScene(){
 
-    if(lastObjects.length===0){
+    if(
+        detections.length === 0
+    ){
 
-        jarvisSay(
-            "No detecto objetos."
-        );
+        const response =
+            "No detecto objetos en este momento.";
+
+        message.textContent =
+            response;
+
+        speak(response);
 
         return;
     }
 
 
-    let text =
-        "Detecto "
-        +lastObjects.length
-        +" objetos. ";
+    let response =
+        "Detecto " +
+        detections.length +
+        " objetos. ";
 
 
-    lastObjects
-    .slice(0,5)
+    const used = {};
+
+
+    detections
+    .slice(0,6)
     .forEach(
         function(obj){
 
-            text +=
-                translate(obj.class)
-                +". ";
+            const name =
+                spanish[obj.class]
+                || obj.class;
+
+
+            if(
+                !used[name]
+            ){
+
+                response +=
+                    name +
+                    ". ";
+
+                used[name] = true;
+            }
 
         }
     );
 
 
-    jarvisSay(text);
+    message.textContent =
+        response;
+
+    speak(response);
 }
 
 
-// ======================================
-// VOZ DE JARVIS
-// ======================================
+/* =====================================================
+   OBJETO MÁS CERCANO
+===================================================== */
 
-function jarvisSay(text){
-
-    document.getElementById(
-        "message"
-    ).textContent=
-        text;
-
+function closestObject(){
 
     if(
-        !("speechSynthesis"
-          in window)
+        detections.length === 0
     ){
+
+        const response =
+            "No detecto ningún objeto.";
+
+        message.textContent =
+            response;
+
+        speak(response);
+
         return;
     }
 
 
-    speechSynthesis.cancel();
+    let closest =
+        detections[0];
 
 
-    const speech =
-        new SpeechSynthesisUtterance(
-            text
+    let closestDistance =
+        estimateDistance(
+            closest.class,
+            closest.bbox[3]
         );
 
 
-    speech.lang="es-ES";
+    detections
+    .forEach(
+        function(obj){
 
-    speech.rate=.92;
+            const distance =
+                estimateDistance(
+                    obj.class,
+                    obj.bbox[3]
+                );
 
-    speech.pitch=.75;
 
-    speech.volume=1;
+            if(
+                distance <
+                closestDistance
+            ){
 
+                closest =
+                    obj;
 
-    speechSynthesis.speak(
-        speech
+                closestDistance =
+                    distance;
+            }
+
+        }
     );
+
+
+    const name =
+        spanish[closest.class]
+        || closest.class;
+
+
+    const response =
+        "El objeto que parece estar " +
+        "más cerca es " +
+        name +
+        ", aproximadamente a " +
+        closestDistance.toFixed(1) +
+        " metros.";
+
+
+    message.textContent =
+        response;
+
+    speak(response);
 }
 
 
-// ======================================
-// INICIO
-// ======================================
+/* =====================================================
+   BOTONES
+===================================================== */
+
+startButton.addEventListener(
+    "click",
+    startCamera
+);
+
 
 document.getElementById(
-    "start"
-).onclick=
-    startCamera;
+    "voiceButton"
+).addEventListener(
+    "click",
+    listen
+);
+
+
+/* =====================================================
+   INICIO
+===================================================== */
+
+console.log(
+    "JARVIS Vision System cargado."
+);
 
 </script>
 
 </body>
-</html># index.html
+</html>
