@@ -9,13 +9,9 @@ initial-scale=1.0,
 maximum-scale=1.0,
 user-scalable=no">
 
-<title>JARVIS VISION</title>
+<title>JARVIS VISION AI</title>
 
 <style>
-
-/* =====================================================
-   BASE
-===================================================== */
 
 *{
     box-sizing:border-box;
@@ -32,344 +28,202 @@ html,body{
     color:#00d9ff;
 }
 
-
 /* =====================================================
    CÁMARA
 ===================================================== */
 
 #camera{
-
     position:fixed;
-
     inset:0;
-
     width:100%;
     height:100%;
-
     object-fit:cover;
-
-    /*
-       IMPORTANTE:
-       Sin filtro.
-       La cámara conserva sus colores normales.
-    */
-
     filter:none;
 }
-
 
 /* =====================================================
    CANVAS
 ===================================================== */
 
 #canvas{
-
     position:fixed;
-
     inset:0;
-
     width:100%;
     height:100%;
-
     pointer-events:none;
 }
-
 
 /* =====================================================
    HUD
 ===================================================== */
 
 #hud{
-
     position:fixed;
-
     inset:0;
-
     pointer-events:none;
 }
-
 
 /* =====================================================
    TÍTULO
 ===================================================== */
 
 #title{
-
     position:absolute;
-
-    top:18px;
-
+    top:17px;
     left:50%;
-
-    transform:
-        translateX(-50%);
-
+    transform:translateX(-50%);
     text-align:center;
-
     text-shadow:
         0 0 8px #00d9ff,
         0 0 20px #008cff;
 }
 
 #title b{
-
-    font-size:24px;
-
+    font-size:23px;
     letter-spacing:5px;
 }
 
 #title small{
-
     display:block;
-
     margin-top:4px;
-
-    font-size:10px;
-
+    font-size:9px;
     letter-spacing:3px;
-
     opacity:.8;
 }
-
 
 /* =====================================================
    ESQUINAS
 ===================================================== */
 
 .corner{
-
     position:absolute;
-
     width:60px;
-
     height:60px;
-
     border-color:#00d9ff;
-
-    filter:
-        drop-shadow(
-            0 0 8px #00cfff
-        );
+    filter:drop-shadow(0 0 8px #00cfff);
 }
 
 .tl{
-
     top:15px;
     left:15px;
-
     border-top:2px solid;
     border-left:2px solid;
 }
 
 .tr{
-
     top:15px;
     right:15px;
-
     border-top:2px solid;
     border-right:2px solid;
 }
 
 .bl{
-
     bottom:15px;
     left:15px;
-
     border-bottom:2px solid;
     border-left:2px solid;
 }
 
 .br{
-
     bottom:15px;
     right:15px;
-
     border-bottom:2px solid;
     border-right:2px solid;
 }
 
-
 /* =====================================================
-   LÍNEA DE ESCANEO
+   ESCÁNER
 ===================================================== */
 
 #scan{
-
     position:absolute;
-
     width:100%;
-
     height:2px;
-
     background:#00d9ff;
-
-    opacity:.22;
-
-    box-shadow:
-        0 0 15px #00d9ff;
-
-    animation:
-        scan 4s linear infinite;
+    opacity:.20;
+    box-shadow:0 0 15px #00d9ff;
+    animation:scan 4s linear infinite;
 }
 
 @keyframes scan{
-
-    from{
-        top:0;
-    }
-
-    to{
-        top:100%;
-    }
-
+    from{top:0}
+    to{top:100%}
 }
-
 
 /* =====================================================
    PANEL JARVIS
 ===================================================== */
 
 #jarvis{
-
     position:absolute;
-
-    left:15px;
-
-    bottom:15px;
-
-    width:285px;
-
-    padding:12px;
-
-    background:
-        rgba(0,15,30,.78);
-
-    border-left:
-        3px solid #00d9ff;
-
-    box-shadow:
-        0 0 20px
-        rgba(0,190,255,.25);
-
-    backdrop-filter:
-        blur(5px);
+    left:12px;
+    bottom:12px;
+    width:270px;
+    padding:11px;
+    background:rgba(0,15,30,.82);
+    border-left:3px solid #00d9ff;
+    box-shadow:0 0 20px rgba(0,190,255,.25);
+    backdrop-filter:blur(5px);
 }
 
 #jarvisName{
-
-    font-size:14px;
-
+    font-size:13px;
     font-weight:bold;
-
     letter-spacing:2px;
 }
 
 #message{
-
     margin-top:6px;
-
     min-height:32px;
-
-    font-size:11px;
-
-    line-height:1.5;
+    font-size:10px;
+    line-height:1.45;
 }
-
-
-/* =====================================================
-   BOTÓN MICRO
-===================================================== */
 
 #voiceButton{
-
     pointer-events:auto;
-
-    margin-top:8px;
-
-    padding:10px 14px;
-
+    margin-top:7px;
+    padding:9px 12px;
     color:#00d9ff;
-
-    background:
-        rgba(0,40,70,.9);
-
-    border:
-        1px solid #00d9ff;
-
+    background:rgba(0,40,70,.9);
+    border:1px solid #00d9ff;
     border-radius:5px;
-
     font-family:monospace;
-
-    font-size:11px;
+    font-size:10px;
 }
-
-#voiceButton:active{
-
-    background:
-        rgba(0,120,190,.8);
-
-}
-
 
 /* =====================================================
    ESTADO
 ===================================================== */
 
 #status{
-
     position:absolute;
-
-    right:15px;
-
-    bottom:15px;
-
+    right:12px;
+    bottom:12px;
     text-align:right;
-
-    font-size:10px;
-
+    font-size:9px;
     line-height:1.8;
-
-    text-shadow:
-        0 0 8px #00d9ff;
+    text-shadow:0 0 8px #00d9ff;
 }
-
 
 /* =====================================================
    BOTÓN INICIAL
 ===================================================== */
 
 #start{
-
     position:fixed;
-
     z-index:50;
-
     top:50%;
     left:50%;
-
-    transform:
-        translate(-50%,-50%);
-
+    transform:translate(-50%,-50%);
     padding:18px 25px;
-
     color:#00d9ff;
-
-    background:
-        rgba(0,10,25,.95);
-
-    border:
-        1px solid #00d9ff;
-
+    background:rgba(0,10,25,.96);
+    border:1px solid #00d9ff;
     border-radius:6px;
-
     font-family:monospace;
-
-    font-size:16px;
-
-    box-shadow:
-        0 0 25px #008cff;
+    font-size:15px;
+    box-shadow:0 0 25px #008cff;
 }
-
 
 /* =====================================================
    MÓVIL
@@ -378,40 +232,26 @@ html,body{
 @media(max-width:600px){
 
     #title b{
-
         font-size:18px;
     }
 
     #jarvis{
-
-        width:235px;
-
-        left:10px;
-
-        bottom:10px;
+        width:225px;
+        left:8px;
+        bottom:8px;
     }
 
     #status{
-
-        right:10px;
-
-        bottom:10px;
-
-        font-size:9px;
+        right:8px;
+        bottom:8px;
+        font-size:8px;
     }
-
 }
 
 </style>
 </head>
 
-
 <body>
-
-
-<!-- ===================================================
-     CÁMARA
-=================================================== -->
 
 <video
 id="camera"
@@ -420,334 +260,323 @@ playsinline
 muted>
 </video>
 
-
-<!-- ===================================================
-     CANVAS PARA LAS CAJAS
-=================================================== -->
-
-<canvas
-id="canvas">
-</canvas>
-
-
-<!-- ===================================================
-     HUD
-=================================================== -->
+<canvas id="canvas"></canvas>
 
 <div id="hud">
 
-    <div id="scan"></div>
+<div id="scan"></div>
 
-    <div class="corner tl"></div>
+<div class="corner tl"></div>
+<div class="corner tr"></div>
+<div class="corner bl"></div>
+<div class="corner br"></div>
 
-    <div class="corner tr"></div>
+<div id="title">
+<b>J.A.R.V.I.S.</b>
+<small>AI VISION • OBJECT TRACKING</small>
+</div>
 
-    <div class="corner bl"></div>
+<div id="jarvis">
 
-    <div class="corner br"></div>
+<div id="jarvisName">
+JARVIS
+</div>
 
+<div id="message">
+Sistema preparado.
+</div>
 
-    <div id="title">
-
-        <b>J.A.R.V.I.S.</b>
-
-        <small>
-            ADVANCED VISION SYSTEM
-        </small>
-
-    </div>
-
-
-    <!-- PANEL JARVIS -->
-
-    <div id="jarvis">
-
-        <div id="jarvisName">
-            JARVIS
-        </div>
-
-        <div id="message">
-
-            Sistema preparado.
-
-        </div>
-
-        <button
-        id="voiceButton">
-
-            🎙 HABLAR CON JARVIS
-
-        </button>
-
-    </div>
-
-
-    <!-- ESTADO -->
-
-    <div id="status">
-
-        SISTEMA:
-        <span id="system">
-            ONLINE
-        </span>
-
-        <br>
-
-        CÁMARA:
-        <span id="cameraStatus">
-            OFF
-        </span>
-
-        <br>
-
-        IA:
-        <span id="aiStatus">
-            OFF
-        </span>
-
-        <br>
-
-        OBJETOS:
-        <span id="objectCount">
-            0
-        </span>
-
-        <br>
-
-        MICRÓFONO:
-        <span id="micStatus">
-            OFF
-        </span>
-
-    </div>
+<button id="voiceButton">
+🎙 HABLAR CON JARVIS
+</button>
 
 </div>
 
+<div id="status">
 
-<!-- ===================================================
-     ACTIVAR
-=================================================== -->
+SISTEMA:
+<span id="system">ONLINE</span>
+
+<br>
+
+CÁMARA:
+<span id="cameraStatus">OFF</span>
+
+<br>
+
+IA:
+<span id="aiStatus">OFF</span>
+
+<br>
+
+TRACKING:
+<span id="trackingStatus">OFF</span>
+
+<br>
+
+OBJETOS:
+<span id="objectCount">0</span>
+
+<br>
+
+FPS:
+<span id="fps">0</span>
+
+</div>
+
+</div>
 
 <button id="start">
-
-    ACTIVAR JARVIS
-
+ACTIVAR JARVIS
 </button>
 
 
 <!-- ===================================================
-     TENSORFLOW
+     IA
 =================================================== -->
 
-<script
-src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs">
+<script src=
+"https://cdn.jsdelivr.net/npm/@tensorflow/tfjs">
 </script>
 
-
-<script
-src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd">
+<script src=
+"https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd">
 </script>
 
 
 <script>
 
 /* =====================================================
-   VARIABLES
+   ELEMENTOS
 ===================================================== */
 
 const video =
-document.getElementById(
-    "camera"
-);
+document.getElementById("camera");
 
 const canvas =
-document.getElementById(
-    "canvas"
-);
+document.getElementById("canvas");
 
 const ctx =
-canvas.getContext(
-    "2d"
-);
+canvas.getContext("2d");
 
 const startButton =
-document.getElementById(
-    "start"
-);
+document.getElementById("start");
 
 const voiceButton =
-document.getElementById(
-    "voiceButton"
-);
+document.getElementById("voiceButton");
 
 const message =
-document.getElementById(
-    "message"
-);
+document.getElementById("message");
 
 const cameraStatus =
-document.getElementById(
-    "cameraStatus"
-);
+document.getElementById("cameraStatus");
 
 const aiStatus =
-document.getElementById(
-    "aiStatus"
-);
+document.getElementById("aiStatus");
+
+const trackingStatus =
+document.getElementById("trackingStatus");
 
 const objectCount =
-document.getElementById(
-    "objectCount"
-);
+document.getElementById("objectCount");
 
-const micStatus =
-document.getElementById(
-    "micStatus"
-);
+const fpsElement =
+document.getElementById("fps");
 
 
-let model = null;
+/* =====================================================
+   VARIABLES
+===================================================== */
 
-let active = false;
+let model=null;
 
-let objects = [];
+let active=false;
 
-let detecting = false;
+let detecting=false;
+
+let tracks=[];
+
+let nextTrackID=1;
+
+let lastDetectionTime=0;
+
+let frameCounter=0;
+
+let fpsTime=performance.now();
+
+
+/*
+   Cuánto tiempo sobrevive una caja
+   cuando una detección desaparece.
+*/
+
+const MAX_MISSED=8;
+
+
+/*
+   Umbral de coincidencia.
+*/
+
+const IOU_THRESHOLD=.18;
+
+
+/*
+   Factor de suavizado.
+
+   Menor = más estable.
+   Mayor = sigue más rápido.
+*/
+
+const SMOOTHING=.35;
 
 
 /* =====================================================
    NOMBRES
 ===================================================== */
 
-const names = {
+const names={
 
-    person:"persona",
+person:"persona",
 
-    bicycle:"bicicleta",
+bicycle:"bicicleta",
 
-    car:"auto",
+car:"auto",
 
-    motorcycle:"motocicleta",
+motorcycle:"motocicleta",
 
-    airplane:"avión",
+airplane:"avión",
 
-    bus:"autobús",
+bus:"autobús",
 
-    train:"tren",
+train:"tren",
 
-    truck:"camión",
+truck:"camión",
 
-    boat:"barco",
+boat:"barco",
 
-    traffic_light:"semáforo",
+traffic_light:"semáforo",
 
-    stop_sign:"señal de stop",
+stop_sign:"señal de stop",
 
-    bench:"banco",
+bench:"banco",
 
-    bird:"pájaro",
+bird:"pájaro",
 
-    cat:"gato",
+cat:"gato",
 
-    dog:"perro",
+dog:"perro",
 
-    horse:"caballo",
+horse:"caballo",
 
-    sheep:"oveja",
+sheep:"oveja",
 
-    cow:"vaca",
+cow:"vaca",
 
-    elephant:"elefante",
+elephant:"elefante",
 
-    bear:"oso",
+bear:"oso",
 
-    zebra:"cebra",
+zebra:"cebra",
 
-    giraffe:"jirafa",
+giraffe:"jirafa",
 
-    backpack:"mochila",
+backpack:"mochila",
 
-    umbrella:"paraguas",
+umbrella:"paraguas",
 
-    handbag:"bolso",
+handbag:"bolso",
 
-    suitcase:"maleta",
+suitcase:"maleta",
 
-    bottle:"botella",
+frisbee:"frisbee",
 
-    cup:"taza",
+skis:"esquís",
 
-    fork:"tenedor",
+snowboard:"snowboard",
 
-    knife:"cuchillo",
+sports_ball:"pelota",
 
-    spoon:"cuchara",
+kite:"cometa",
 
-    bowl:"tazón",
+skateboard:"skateboard",
 
-    banana:"banana",
+bottle:"botella",
 
-    apple:"manzana",
+wine_glass:"copa",
 
-    sandwich:"sándwich",
+cup:"taza",
 
-    orange:"naranja",
+fork:"tenedor",
 
-    broccoli:"brócoli",
+knife:"cuchillo",
 
-    carrot:"zanahoria",
+spoon:"cuchara",
 
-    pizza:"pizza",
+bowl:"tazón",
 
-    donut:"donut",
+banana:"banana",
 
-    cake:"pastel",
+apple:"manzana",
 
-    chair:"silla",
+sandwich:"sándwich",
 
-    couch:"sofá",
+orange:"naranja",
 
-    potted_plant:"planta",
+broccoli:"brócoli",
 
-    bed:"cama",
+carrot:"zanahoria",
 
-    dining_table:"mesa",
+pizza:"pizza",
 
-    toilet:"inodoro",
+donut:"donut",
 
-    tv:"televisor",
+cake:"pastel",
 
-    laptop:"computadora",
+chair:"silla",
 
-    mouse:"ratón",
+couch:"sofá",
 
-    remote:"control",
+potted_plant:"planta",
 
-    keyboard:"teclado",
+bed:"cama",
 
-    cell_phone:"teléfono",
+dining_table:"mesa",
 
-    microwave:"microondas",
+toilet:"inodoro",
 
-    oven:"horno",
+tv:"televisor",
 
-    toaster:"tostadora",
+laptop:"computadora",
 
-    sink:"fregadero",
+mouse:"ratón",
 
-    refrigerator:"refrigerador",
+remote:"control",
 
-    book:"libro",
+keyboard:"teclado",
 
-    clock:"reloj",
+cell_phone:"teléfono",
 
-    vase:"florero",
+microwave:"microondas",
 
-    scissors:"tijeras",
+oven:"horno",
 
-    teddy_bear:"oso de peluche",
+toaster:"tostadora",
 
-    toothbrush:"cepillo de dientes"
+sink:"fregadero",
+
+refrigerator:"refrigerador",
+
+book:"libro",
+
+clock:"reloj",
+
+vase:"florero",
+
+scissors:"tijeras",
+
+teddy_bear:"oso de peluche",
+
+toothbrush:"cepillo de dientes"
 
 };
 
@@ -756,75 +585,83 @@ const names = {
    ALTURAS DE REFERENCIA
 ===================================================== */
 
-const heights = {
+const heights={
 
-    person:1.70,
+person:1.70,
 
-    bicycle:1.05,
+bicycle:1.05,
 
-    car:1.50,
+car:1.50,
 
-    motorcycle:1.10,
+motorcycle:1.10,
 
-    bus:3.20,
+bus:3.20,
 
-    truck:2.50,
+truck:2.50,
 
-    chair:.90,
+chair:.90,
 
-    couch:.80,
+couch:.80,
 
-    dining_table:.75,
+dining_table:.75,
 
-    bottle:.25,
+bottle:.25,
 
-    cup:.12,
+cup:.12,
 
-    laptop:.25,
+laptop:.25,
 
-    tv:.70,
+tv:.70,
 
-    backpack:.45,
+backpack:.45,
 
-    suitcase:.70,
+suitcase:.70,
 
-    dog:.60,
+dog:.60,
 
-    cat:.30,
+cat:.30,
 
-    horse:1.50,
+horse:1.50,
 
-    cow:1.40,
+cow:1.40,
 
-    sheep:.80,
+sheep:.80,
 
-    bird:.25,
+bird:.25,
 
-    book:.25,
+book:.25,
 
-    cell_phone:.15,
+cell_phone:.15,
 
-    refrigerator:1.70
+refrigerator:1.70
 
 };
 
 
 /* =====================================================
-   AJUSTAR CANVAS
+   CANVAS
 ===================================================== */
 
-function resize(){
+function resizeCanvas(){
 
-    canvas.width =
-        video.videoWidth;
+    if(
+        video.videoWidth &&
+        video.videoHeight
+    ){
 
-    canvas.height =
-        video.videoHeight;
+        canvas.width=
+            video.videoWidth;
+
+        canvas.height=
+            video.videoHeight;
+    }
+
 }
+
 
 window.addEventListener(
     "resize",
-    resize
+    resizeCanvas
 );
 
 
@@ -836,9 +673,8 @@ async function startCamera(){
 
     try{
 
-        const stream =
-        await navigator
-        .mediaDevices
+        const stream=
+        await navigator.mediaDevices
         .getUserMedia({
 
             video:{
@@ -862,30 +698,22 @@ async function startCamera(){
         });
 
 
-        video.srcObject =
-            stream;
-
+        video.srcObject=stream;
 
         await video.play();
 
+        resizeCanvas();
 
-        resize();
+        active=true;
 
-
-        active = true;
-
-
-        startButton.style.display =
+        startButton.style.display=
             "none";
 
-
-        cameraStatus.textContent =
+        cameraStatus.textContent=
             "ON";
 
-
-        message.textContent =
-            "Cámara activada. Cargando IA...";
-
+        message.textContent=
+            "Cámara activa. Cargando sistema de visión...";
 
         loadAI();
 
@@ -895,11 +723,11 @@ async function startCamera(){
 
         console.error(error);
 
-        message.textContent =
+        message.textContent=
             "No se pudo activar la cámara.";
 
         alert(
-            "Debes permitir el acceso a la cámara."
+            "Permite el acceso a la cámara."
         );
 
     }
@@ -908,35 +736,43 @@ async function startCamera(){
 
 
 /* =====================================================
-   IA
+   CARGAR IA
 ===================================================== */
 
 async function loadAI(){
 
     try{
 
-        aiStatus.textContent =
+        aiStatus.textContent=
             "CARGANDO";
 
 
-        model =
-            await cocoSsd.load();
+        model=
+            await cocoSsd.load({
+
+                base:"lite_mobilenet_v2"
+
+            });
 
 
-        aiStatus.textContent =
+        aiStatus.textContent=
             "ONLINE";
 
 
-        message.textContent =
-            "Visión artificial activada.";
+        trackingStatus.textContent=
+            "ONLINE";
+
+
+        message.textContent=
+            "IA y sistema de tracking activados.";
 
 
         speak(
-            "Sistema de visión activado."
+            "Sistema de visión y seguimiento activado."
         );
 
 
-        detect();
+        detectLoop();
 
     }
 
@@ -944,10 +780,10 @@ async function loadAI(){
 
         console.error(error);
 
-        aiStatus.textContent =
+        aiStatus.textContent=
             "ERROR";
 
-        message.textContent =
+        message.textContent=
             "Error cargando la inteligencia artificial.";
 
     }
@@ -956,54 +792,78 @@ async function loadAI(){
 
 
 /* =====================================================
-   DETECTAR
+   IOU
 ===================================================== */
 
-async function detect(){
+function IoU(a,b){
 
-    if(
-        !active ||
-        !model ||
-        detecting
-    ){
+    const ax=a[0];
+    const ay=a[1];
+    const aw=a[2];
+    const ah=a[3];
 
-        requestAnimationFrame(
-            detect
+    const bx=b[0];
+    const by=b[1];
+    const bw=b[2];
+    const bh=b[3];
+
+
+    const x1=
+        Math.max(
+            ax,
+            bx
         );
 
-        return;
-    }
+    const y1=
+        Math.max(
+            ay,
+            by
+        );
 
 
-    detecting = true;
+    const x2=
+        Math.min(
+            ax+aw,
+            bx+bw
+        );
+
+    const y2=
+        Math.min(
+            ay+ah,
+            by+bh
+        );
 
 
-    try{
-
-        objects =
-            await model.detect(
-                video
-            );
-
-
-        draw(objects);
-
-    }
-
-    catch(error){
-
-        console.error(error);
-
-    }
+    const intersection=
+        Math.max(
+            0,
+            x2-x1
+        )
+        *
+        Math.max(
+            0,
+            y2-y1
+        );
 
 
-    detecting = false;
+    const areaA=
+        aw*ah;
+
+    const areaB=
+        bw*bh;
 
 
-    setTimeout(
-        detect,
-        200
-    );
+    const union=
+        areaA+
+        areaB-
+        intersection;
+
+
+    if(union<=0)
+        return 0;
+
+
+    return intersection/union;
 
 }
 
@@ -1012,30 +872,33 @@ async function detect(){
    DISTANCIA
 ===================================================== */
 
-function distance(
+function estimateDistance(
     object,
     pixelHeight
 ){
 
-    const realHeight =
-        heights[object]
-        || .5;
+    const realHeight=
+        heights[object]||.50;
 
 
-    const focal =
+    if(pixelHeight<=0)
+        return 0;
+
+
+    const focal=
         Math.max(
             500,
-            video.videoWidth * .75
+            video.videoWidth*.75
         );
 
 
-    let d =
-        realHeight *
-        focal /
+    let d=
+        realHeight*
+        focal/
         pixelHeight;
 
 
-    d =
+    d=
         Math.max(
             .2,
             Math.min(
@@ -1046,6 +909,7 @@ function distance(
 
 
     return d;
+
 }
 
 
@@ -1053,26 +917,26 @@ function distance(
    ALTURA
 ===================================================== */
 
-function objectHeight(
+function estimateHeight(
     object,
     pixelHeight,
-    d
+    distance
 ){
 
-    const focal =
+    const focal=
         Math.max(
             500,
-            video.videoWidth * .75
+            video.videoWidth*.75
         );
 
 
-    let h =
-        pixelHeight *
-        d /
+    let h=
+        pixelHeight*
+        distance/
         focal;
 
 
-    h =
+    h=
         Math.max(
             .03,
             Math.min(
@@ -1083,16 +947,617 @@ function objectHeight(
 
 
     return h;
+
 }
 
 
 /* =====================================================
-   DIBUJAR
+   SUAVIZAR CAJA
 ===================================================== */
 
-function draw(
+function smoothBox(
+    oldBox,
+    newBox
+){
+
+    return [
+
+        oldBox[0]+
+        (newBox[0]-oldBox[0])
+        *SMOOTHING,
+
+        oldBox[1]+
+        (newBox[1]-oldBox[1])
+        *SMOOTHING,
+
+        oldBox[2]+
+        (newBox[2]-oldBox[2])
+        *SMOOTHING,
+
+        oldBox[3]+
+        (newBox[3]-oldBox[3])
+        *SMOOTHING
+
+    ];
+
+}
+
+
+/* =====================================================
+   ACTUALIZAR TRACKS
+===================================================== */
+
+function updateTracks(
     predictions
 ){
+
+    /*
+       Primero aumentamos el contador
+       de objetos que no fueron vistos.
+    */
+
+    tracks.forEach(
+        function(track){
+
+            track.missed++;
+
+        }
+    );
+
+
+    /*
+       Intentamos encontrar una caja
+       existente para cada detección.
+    */
+
+    predictions.forEach(
+        function(prediction){
+
+            let bestTrack=null;
+
+            let bestScore=0;
+
+
+            tracks.forEach(
+                function(track){
+
+                    if(
+                        track.className !==
+                        prediction.class
+                    ){
+
+                        return;
+                    }
+
+
+                    const score=
+                        IoU(
+                            track.box,
+                            prediction.bbox
+                        );
+
+
+                    if(
+                        score>
+                        bestScore
+                    ){
+
+                        bestScore=
+                            score;
+
+                        bestTrack=
+                            track;
+                    }
+
+                }
+            );
+
+
+            if(
+                bestTrack &&
+                bestScore>=
+                IOU_THRESHOLD
+            ){
+
+                /*
+                   La caja no salta.
+                   Se acerca progresivamente
+                   a la nueva posición.
+                */
+
+                bestTrack.box=
+                    smoothBox(
+                        bestTrack.box,
+                        prediction.bbox
+                    );
+
+
+                bestTrack.score=
+                    prediction.score;
+
+
+                bestTrack.missed=0;
+
+
+                bestTrack.age++;
+
+
+            }
+
+            else{
+
+                /*
+                   Nuevo objeto.
+                */
+
+                tracks.push({
+
+                    id:
+                        nextTrackID++,
+
+                    className:
+                        prediction.class,
+
+                    box:
+                        prediction.bbox.slice(),
+
+                    score:
+                        prediction.score,
+
+                    missed:0,
+
+                    age:1
+
+                });
+
+            }
+
+        }
+    );
+
+
+    /*
+       Eliminamos únicamente objetos
+       que llevan demasiado tiempo sin
+       ser detectados.
+    */
+
+    tracks=
+        tracks.filter(
+            function(track){
+
+                return (
+                    track.missed
+                    <=
+                    MAX_MISSED
+                );
+
+            }
+        );
+
+}
+
+
+/* =====================================================
+   DETECCIÓN PRINCIPAL
+===================================================== */
+
+async function detectLoop(){
+
+    if(
+        !active ||
+        !model ||
+        detecting
+    ){
+
+        requestAnimationFrame(
+            detectLoop
+        );
+
+        return;
+    }
+
+
+    detecting=true;
+
+
+    try{
+
+        /*
+           Detección normal.
+        */
+
+        const predictions=
+            await model.detect(
+                video,
+                12,
+                .20
+            );
+
+
+        /*
+           Detecciones demasiado pequeñas
+           pueden perderse.
+           
+           Por eso también analizamos
+           regiones ampliadas.
+        */
+
+        const extra=
+            await detectSmallObjects();
+
+
+        /*
+           Unimos resultados.
+        */
+
+        const combined=
+            mergePredictions(
+                predictions,
+                extra
+            );
+
+
+        updateTracks(
+            combined
+        );
+
+
+        drawTracks();
+
+
+        updateFPS();
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Detection:",
+            error
+        );
+
+    }
+
+
+    detecting=false;
+
+
+    /*
+       Aproximadamente 6-8 análisis por
+       segundo dependiendo del iPhone.
+    */
+
+    setTimeout(
+        detectLoop,
+        120
+    );
+
+}
+
+
+/* =====================================================
+   DETECCIÓN DE OBJETOS PEQUEÑOS
+===================================================== */
+
+async function detectSmallObjects(){
+
+    const result=[];
+
+
+    /*
+       Si el vídeo todavía no tiene
+       dimensiones válidas, no hacemos
+       el análisis.
+    */
+
+    if(
+        video.videoWidth<300 ||
+        video.videoHeight<200
+    ){
+
+        return result;
+    }
+
+
+    /*
+       Analizamos cuatro zonas de la imagen.
+
+       El modelo recibe cada zona
+       ampliada, aumentando el tamaño
+       aparente de objetos pequeños.
+    */
+
+    const zones=[
+
+        {
+            x:0,
+            y:0,
+            w:.60,
+            h:.60
+        },
+
+        {
+            x:.40,
+            y:0,
+            w:.60,
+            h:.60
+        },
+
+        {
+            x:0,
+            y:.40,
+            w:.60,
+            h:.60
+        },
+
+        {
+            x:.40,
+            y:.40,
+            w:.60,
+            h:.60
+        }
+
+    ];
+
+
+    /*
+       Para no crear demasiados canvas,
+       usamos un canvas temporal.
+    */
+
+    const temp=
+        document.createElement(
+            "canvas"
+        );
+
+
+    const size=640;
+
+    temp.width=size;
+    temp.height=size;
+
+
+    const tctx=
+        temp.getContext(
+            "2d"
+        );
+
+
+    for(
+        const zone
+        of zones
+    ){
+
+        const sx=
+            zone.x*
+            video.videoWidth;
+
+        const sy=
+            zone.y*
+            video.videoHeight;
+
+        const sw=
+            zone.w*
+            video.videoWidth;
+
+        const sh=
+            zone.h*
+            video.videoHeight;
+
+
+        tctx.clearRect(
+            0,
+            0,
+            size,
+            size
+        );
+
+
+        tctx.drawImage(
+
+            video,
+
+            sx,
+            sy,
+            sw,
+            sh,
+
+            0,
+            0,
+            size,
+            size
+
+        );
+
+
+        let detections=[];
+
+
+        try{
+
+            detections=
+                await model.detect(
+                    temp,
+                    8,
+                    .25
+                );
+
+        }
+
+        catch(error){
+
+            continue;
+        }
+
+
+        detections.forEach(
+            function(obj){
+
+                /*
+                   Convertimos las coordenadas
+                   del recorte a coordenadas
+                   de la cámara completa.
+                */
+
+                const bx=
+                    obj.bbox[0]
+                    /size*
+                    sw+
+                    sx;
+
+
+                const by=
+                    obj.bbox[1]
+                    /size*
+                    sh+
+                    sy;
+
+
+                const bw=
+                    obj.bbox[2]
+                    /size*
+                    sw;
+
+
+                const bh=
+                    obj.bbox[3]
+                    /size*
+                    sh;
+
+
+                /*
+                   Ignoramos detecciones
+                   extremadamente pequeñas
+                   o poco confiables.
+                */
+
+                if(
+                    bw<4 ||
+                    bh<4 ||
+                    obj.score<.25
+                ){
+
+                    return;
+                }
+
+
+                result.push({
+
+                    class:
+                        obj.class,
+
+                    score:
+                        obj.score,
+
+                    bbox:[
+                        bx,
+                        by,
+                        bw,
+                        bh
+                    ]
+
+                });
+
+            }
+        );
+
+    }
+
+
+    return result;
+
+}
+
+
+/* =====================================================
+   ELIMINAR DUPLICADOS
+===================================================== */
+
+function mergePredictions(
+    predictions
+){
+
+    const final=[];
+
+
+    predictions.forEach(
+        function(pred){
+
+            let duplicate=false;
+
+
+            final.forEach(
+                function(existing){
+
+                    if(
+                        existing.class !==
+                        pred.class
+                    ){
+
+                        return;
+                    }
+
+
+                    const overlap=
+                        IoU(
+                            existing.bbox,
+                            pred.bbox
+                        );
+
+
+                    if(
+                        overlap>.45
+                    ){
+
+                        duplicate=true;
+
+
+                        /*
+                           Conservamos la detección
+                           con mayor confianza.
+                        */
+
+                        if(
+                            pred.score>
+                            existing.score
+                        ){
+
+                            existing.bbox=
+                                pred.bbox;
+
+                            existing.score=
+                                pred.score;
+                        }
+
+                    }
+
+                }
+            );
+
+
+            if(!duplicate){
+
+                final.push(
+                    pred
+                );
+
+            }
+
+        }
+    );
+
+
+    return final;
+
+}
+
+
+/* =====================================================
+   DIBUJAR TRACKS
+===================================================== */
+
+function drawTracks(){
 
     ctx.clearRect(
         0,
@@ -1102,62 +1567,78 @@ function draw(
     );
 
 
-    objectCount.textContent =
-        predictions.length;
+    objectCount.textContent=
+        tracks.length;
 
 
-    predictions.forEach(
-        function(obj){
+    tracks.forEach(
+        function(track){
 
-            const x =
-                obj.bbox[0];
+            /*
+               Si está desapareciendo,
+               hacemos la caja ligeramente
+               transparente.
+            */
 
-            const y =
-                obj.bbox[1];
-
-            const w =
-                obj.bbox[2];
-
-            const h =
-                obj.bbox[3];
+            const alpha=
+                Math.max(
+                    .35,
+                    1-
+                    track.missed*.08
+                );
 
 
-            const d =
-                distance(
-                    obj.class,
+            ctx.globalAlpha=
+                alpha;
+
+
+            const x=
+                track.box[0];
+
+            const y=
+                track.box[1];
+
+            const w=
+                track.box[2];
+
+            const h=
+                track.box[3];
+
+
+            const d=
+                estimateDistance(
+                    track.className,
                     h
                 );
 
 
-            const realH =
-                objectHeight(
-                    obj.class,
+            const height=
+                estimateHeight(
+                    track.className,
                     h,
                     d
                 );
 
 
-            const name =
-                names[obj.class]
+            const name=
+                names[track.className]
                 ||
-                obj.class;
+                track.className;
 
 
             /* -----------------------------------------
-               CAJA PRINCIPAL
+               CAJA
             ----------------------------------------- */
 
-            ctx.strokeStyle =
+            ctx.strokeStyle=
                 "#00d9ff";
 
-            ctx.lineWidth =
-                3;
+            ctx.lineWidth=3;
 
-            ctx.shadowColor =
+            ctx.shadowColor=
                 "#00d9ff";
 
-            ctx.shadowBlur =
-                15;
+            ctx.shadowBlur=14;
 
 
             ctx.strokeRect(
@@ -1168,17 +1649,124 @@ function draw(
             );
 
 
-            ctx.shadowBlur =
-                0;
+            ctx.shadowBlur=0;
 
 
             /* -----------------------------------------
-               PANEL
+               ESQUINAS
             ----------------------------------------- */
 
-            const panelWidth =
+            const c=
+                Math.min(
+                    18,
+                    Math.max(
+                        8,
+                        Math.min(w,h)*.18
+                    )
+                );
+
+
+            ctx.strokeStyle=
+                "#ffffff";
+
+            ctx.lineWidth=2;
+
+
+            /* arriba izquierda */
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                x,
+                y+c
+            );
+
+            ctx.lineTo(
+                x,
+                y
+            );
+
+            ctx.lineTo(
+                x+c,
+                y
+            );
+
+            ctx.stroke();
+
+
+            /* arriba derecha */
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                x+w-c,
+                y
+            );
+
+            ctx.lineTo(
+                x+w,
+                y
+            );
+
+            ctx.lineTo(
+                x+w,
+                y+c
+            );
+
+            ctx.stroke();
+
+
+            /* abajo izquierda */
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                x,
+                y+h-c
+            );
+
+            ctx.lineTo(
+                x,
+                y+h
+            );
+
+            ctx.lineTo(
+                x+c,
+                y+h
+            );
+
+            ctx.stroke();
+
+
+            /* abajo derecha */
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                x+w-c,
+                y+h
+            );
+
+            ctx.lineTo(
+                x+w,
+                y+h
+            );
+
+            ctx.lineTo(
+                x+w,
+                y+h-c
+            );
+
+            ctx.stroke();
+
+
+            /* -----------------------------------------
+               PANEL DE INFORMACIÓN
+            ----------------------------------------- */
+
+            const panelWidth=
                 Math.max(
-                    180,
+                    185,
                     Math.min(
                         250,
                         w
@@ -1186,28 +1774,28 @@ function draw(
                 );
 
 
-            const panelHeight =
+            const panelHeight=
                 78;
 
 
-            let py =
-                y -
-                panelHeight -
+            let py=
+                y-
+                panelHeight-
                 5;
 
 
             if(
-                py < 5
+                py<5
             ){
 
-                py =
-                    y + 5;
+                py=
+                    y+5;
 
             }
 
 
-            ctx.fillStyle =
-                "rgba(0,15,30,.90)";
+            ctx.fillStyle=
+                "rgba(0,12,25,.92)";
 
 
             ctx.fillRect(
@@ -1218,11 +1806,10 @@ function draw(
             );
 
 
-            ctx.strokeStyle =
+            ctx.strokeStyle=
                 "#00d9ff";
 
-            ctx.lineWidth =
-                1;
+            ctx.lineWidth=1;
 
 
             ctx.strokeRect(
@@ -1237,11 +1824,11 @@ function draw(
                TEXTO
             ----------------------------------------- */
 
-            ctx.fillStyle =
+            ctx.fillStyle=
                 "#00eaff";
 
 
-            ctx.font =
+            ctx.font=
                 "bold 14px monospace";
 
 
@@ -1252,13 +1839,16 @@ function draw(
             );
 
 
-            ctx.font =
+            ctx.font=
                 "11px monospace";
 
 
             ctx.fillText(
-                "CONFIANZA: " +
-                (obj.score*100)
+                "ID: #" +
+                track.id +
+                "   " +
+                "CONF: " +
+                (track.score*100)
                 .toFixed(0) +
                 "%",
                 x+7,
@@ -1267,7 +1857,7 @@ function draw(
 
 
             ctx.fillText(
-                "DISTANCIA: " +
+                "DIST: " +
                 d.toFixed(1) +
                 " m",
                 x+7,
@@ -1276,12 +1866,40 @@ function draw(
 
 
             ctx.fillText(
-                "ALTURA EST.: " +
-                realH.toFixed(2) +
+                "ALTURA: " +
+                height.toFixed(2) +
                 " m",
                 x+7,
                 py+66
             );
+
+
+            /*
+               Línea de tracking.
+            */
+
+            ctx.strokeStyle=
+                "rgba(0,220,255,.55)";
+
+            ctx.lineWidth=1;
+
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                x+w/2,
+                y+h
+            );
+
+            ctx.lineTo(
+                x+w/2,
+                y+h+12
+            );
+
+            ctx.stroke();
+
+
+            ctx.globalAlpha=1;
 
         }
     );
@@ -1290,7 +1908,36 @@ function draw(
 
 
 /* =====================================================
-   VOZ DE JARVIS
+   FPS
+===================================================== */
+
+function updateFPS(){
+
+    frameCounter++;
+
+
+    const now=
+        performance.now();
+
+
+    if(
+        now-fpsTime>=1000
+    ){
+
+        fpsElement.textContent=
+            frameCounter;
+
+
+        frameCounter=0;
+
+        fpsTime=now;
+    }
+
+}
+
+
+/* =====================================================
+   VOZ
 ===================================================== */
 
 function speak(text){
@@ -1306,224 +1953,141 @@ function speak(text){
     speechSynthesis.cancel();
 
 
-    const voice =
+    const utterance=
         new SpeechSynthesisUtterance(
             text
         );
 
 
-    voice.lang =
+    utterance.lang=
         "es-ES";
 
 
-    voice.rate =
+    utterance.rate=
         .9;
 
 
-    voice.pitch =
-        .75;
+    utterance.pitch=
+        .72;
 
 
-    voice.volume =
+    utterance.volume=
         1;
 
 
     speechSynthesis.speak(
-        voice
+        utterance
     );
 
 }
 
 
 /* =====================================================
-   RECONOCIMIENTO DE VOZ
+   MICROFONO
 ===================================================== */
 
 function listen(){
 
-    /*
-       Safari/iOS utiliza normalmente
-       webkitSpeechRecognition cuando
-       está disponible.
-    */
-
-    const Recognition =
+    const Recognition=
         window.SpeechRecognition ||
         window.webkitSpeechRecognition;
 
 
-    if(
-        !Recognition
-    ){
+    if(!Recognition){
 
-        micStatus.textContent =
-            "NO DISP.";
-
-
-        message.textContent =
+        message.textContent=
             "El reconocimiento de voz no está disponible en este navegador.";
-
 
         speak(
             "El reconocimiento de voz no está disponible."
         );
 
+        return;
+    }
+
+
+    const recognition=
+        new Recognition();
+
+
+    recognition.lang=
+        "es-ES";
+
+
+    recognition.continuous=
+        false;
+
+
+    recognition.interimResults=
+        false;
+
+
+    recognition.maxAlternatives=
+        1;
+
+
+    message.textContent=
+        "Te escucho...";
+
+
+    try{
+
+        recognition.start();
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        message.textContent=
+            "No se pudo iniciar el micrófono.";
 
         return;
     }
 
 
-    const recognition =
-        new Recognition();
-
-
-    recognition.lang =
-        "es-ES";
-
-
-    recognition.continuous =
-        false;
-
-
-    recognition.interimResults =
-        false;
-
-
-    recognition.maxAlternatives =
-        1;
-
-
-    micStatus.textContent =
-        "ESCUCHANDO";
-
-
-    message.textContent =
-        "Te escucho...";
-
-
-    /*
-       Esperamos un pequeño momento
-       antes de escuchar.
-    */
-
-    setTimeout(
-        function(){
-
-            try{
-
-                recognition.start();
-
-            }
-
-            catch(error){
-
-                console.log(error);
-
-            }
-
-        },
-        150
-    );
-
-
-    recognition.onresult =
+    recognition.onresult=
         function(event){
 
-            const text =
+            const command=
                 event
                 .results[0][0]
                 .transcript
                 .toLowerCase();
 
 
-            console.log(
-                "Usuario:",
-                text
-            );
-
-
-            micStatus.textContent =
-                "ON";
-
-
             processCommand(
-                text
+                command
             );
 
         };
 
 
-    recognition.onspeechstart =
-        function(){
-
-            micStatus.textContent =
-                "ESCUCHANDO";
-
-        };
-
-
-    recognition.onspeechend =
-        function(){
-
-            micStatus.textContent =
-                "PROCESANDO";
-
-        };
-
-
-    recognition.onerror =
+    recognition.onerror=
         function(event){
 
             console.log(
-                "Micrófono:",
+                "VOICE ERROR:",
                 event.error
             );
 
 
-            micStatus.textContent =
-                "ERROR";
-
-
             if(
-                event.error ===
+                event.error===
                 "not-allowed"
             ){
 
-                message.textContent =
-                    "Permiso de micrófono bloqueado. Permite el micrófono en Safari.";
-
-            }
-
-            else if(
-                event.error ===
-                "network"
-            ){
-
-                message.textContent =
-                    "Safari no pudo conectar con el servicio de reconocimiento de voz.";
+                message.textContent=
+                    "Permiso de micrófono bloqueado.";
 
             }
 
             else{
 
-                message.textContent =
-                    "No pude escuchar correctamente.";
+                message.textContent=
+                    "No pude entenderte.";
 
-            }
-
-        };
-
-
-    recognition.onend =
-        function(){
-
-            if(
-                micStatus.textContent !==
-                "ERROR"
-            ){
-
-                micStatus.textContent =
-                    "OFF";
             }
 
         };
@@ -1532,19 +2096,12 @@ function listen(){
 
 
 /* =====================================================
-   PROCESAR COMANDO
+   COMANDOS JARVIS
 ===================================================== */
 
 function processCommand(
     command
 ){
-
-    console.log(
-        command
-    );
-
-
-    /* SALUDO */
 
     if(
         command.includes("hola")
@@ -1560,8 +2117,6 @@ function processCommand(
     }
 
 
-    /* QUÉ VES */
-
     if(
         command.includes("qué ves")
         ||
@@ -1574,13 +2129,11 @@ function processCommand(
         command.includes("describe")
     ){
 
-        describe();
+        describeScene();
 
         return;
     }
 
-
-    /* CUÁNTOS */
 
     if(
         command.includes("cuántos")
@@ -1589,16 +2142,26 @@ function processCommand(
     ){
 
         respond(
-            "Actualmente detecto " +
-            objects.length +
-            " objetos."
+            "Actualmente mantengo " +
+            tracks.length +
+            " objetos en seguimiento."
         );
 
         return;
     }
 
 
-    /* ESTADO */
+    if(
+        command.includes("más cerca")
+        ||
+        command.includes("mas cerca")
+    ){
+
+        closestObject();
+
+        return;
+    }
+
 
     if(
         command.includes("estado")
@@ -1607,28 +2170,12 @@ function processCommand(
     ){
 
         respond(
-            "Todos los sistemas están operativos. Cámara e inteligencia visual activadas."
+            "Cámara, inteligencia visual y tracking están operativos."
         );
 
         return;
     }
 
-
-    /* MÁS CERCANO */
-
-    if(
-        command.includes("más cerca")
-        ||
-        command.includes("mas cerca")
-    ){
-
-        closest();
-
-        return;
-    }
-
-
-    /* AYUDA */
 
     if(
         command.includes("ayuda")
@@ -1637,17 +2184,15 @@ function processCommand(
     ){
 
         respond(
-            "Puedes preguntarme qué veo, cuántos objetos detecto, cuál está más cerca o cuál es el estado del sistema."
+            "Puedes preguntarme qué veo, cuántos objetos detecto, cuál está más cerca o pedir el estado del sistema."
         );
 
         return;
     }
 
 
-    /* NO ENTENDIDO */
-
     respond(
-        "He escuchado tu comando, pero todavía no tengo una respuesta configurada para esa pregunta."
+        "Comando recibido. Todavía no tengo una respuesta configurada para esa pregunta."
     );
 
 }
@@ -1659,12 +2204,10 @@ function processCommand(
 
 function respond(text){
 
-    message.textContent =
+    message.textContent=
         text;
 
-    speak(
-        text
-    );
+    speak(text);
 
 }
 
@@ -1673,50 +2216,50 @@ function respond(text){
    DESCRIBIR ESCENA
 ===================================================== */
 
-function describe(){
+function describeScene(){
 
     if(
-        objects.length === 0
+        tracks.length===0
     ){
 
         respond(
-            "No detecto ningún objeto en este momento."
+            "No detecto objetos en este momento."
         );
 
         return;
     }
 
 
-    let text =
+    let text=
         "Detecto " +
-        objects.length +
+        tracks.length +
         " objetos. ";
 
 
-    const found = {};
+    const used={};
 
 
-    objects
+    tracks
     .slice(0,6)
     .forEach(
-        function(obj){
+        function(track){
 
-            const name =
-                names[obj.class]
+            const name=
+                names[track.className]
                 ||
-                obj.class;
+                track.className;
 
 
             if(
-                !found[name]
+                !used[name]
             ){
 
-                text +=
-                    name +
+                text+=
+                    name+
                     ". ";
 
-                found[name] =
-                    true;
+                used[name]=true;
+
             }
 
         }
@@ -1731,13 +2274,13 @@ function describe(){
 
 
 /* =====================================================
-   MÁS CERCANO
+   OBJETO MÁS CERCANO
 ===================================================== */
 
-function closest(){
+function closestObject(){
 
     if(
-        objects.length === 0
+        tracks.length===0
     ){
 
         respond(
@@ -1748,36 +2291,34 @@ function closest(){
     }
 
 
-    let nearest =
-        objects[0];
+    let nearest=
+        tracks[0];
 
 
-    let nearestDistance =
-        distance(
-            nearest.class,
-            nearest.bbox[3]
+    let nearestDistance=
+        distanceForTrack(
+            nearest
         );
 
 
-    objects.forEach(
-        function(obj){
+    tracks.forEach(
+        function(track){
 
-            const d =
-                distance(
-                    obj.class,
-                    obj.bbox[3]
+            const d=
+                distanceForTrack(
+                    track
                 );
 
 
             if(
-                d <
+                d<
                 nearestDistance
             ){
 
-                nearest =
-                    obj;
+                nearest=
+                    track;
 
-                nearestDistance =
+                nearestDistance=
                     d;
             }
 
@@ -1785,14 +2326,14 @@ function closest(){
     );
 
 
-    const name =
-        names[nearest.class]
+    const name=
+        names[nearest.className]
         ||
-        nearest.class;
+        nearest.className;
 
 
     respond(
-        "El objeto que parece estar más cerca es " +
+        "El objeto más cercano parece ser " +
         name +
         ", aproximadamente a " +
         nearestDistance.toFixed(1) +
@@ -1803,14 +2344,30 @@ function closest(){
 
 
 /* =====================================================
+   DISTANCIA DE TRACK
+===================================================== */
+
+function distanceForTrack(
+    track
+){
+
+    return estimateDistance(
+        track.className,
+        track.box[3]
+    );
+
+}
+
+
+/* =====================================================
    BOTONES
 ===================================================== */
 
-startButton.onclick =
+startButton.onclick=
     startCamera;
 
 
-voiceButton.onclick =
+voiceButton.onclick=
     listen;
 
 
@@ -1819,7 +2376,7 @@ voiceButton.onclick =
 ===================================================== */
 
 console.log(
-    "JARVIS VISION ONLINE"
+    "JARVIS AI VISION + TRACKING ONLINE"
 );
 
 </script>
