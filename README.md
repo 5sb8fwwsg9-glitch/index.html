@@ -2,13 +2,20 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+
 <meta name="viewport"
-      content="width=device-width, initial-scale=1.0,
-               maximum-scale=1.0, user-scalable=no">
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
 
 <title>JARVIS VISION</title>
 
 <style>
+
+/* =====================================================
+   BASE
+===================================================== */
 
 *{
     box-sizing:border-box;
@@ -16,6 +23,7 @@
 
 html,body{
     margin:0;
+    padding:0;
     width:100%;
     height:100%;
     overflow:hidden;
@@ -30,7 +38,9 @@ html,body{
 ===================================================== */
 
 #camera{
+
     position:fixed;
+
     inset:0;
 
     width:100%;
@@ -39,25 +49,23 @@ html,body{
     object-fit:cover;
 
     /*
-       Azul futurista SIN invertir los colores.
+       IMPORTANTE:
+       Sin filtro.
+       La cámara conserva sus colores normales.
     */
 
-    filter:
-        grayscale(100%)
-        contrast(125%)
-        brightness(85%)
-        sepia(100%)
-        hue-rotate(165deg)
-        saturate(500%);
+    filter:none;
 }
 
 
 /* =====================================================
-   CANVAS DE DETECCIÓN
+   CANVAS
 ===================================================== */
 
-#detectionCanvas{
+#canvas{
+
     position:fixed;
+
     inset:0;
 
     width:100%;
@@ -72,7 +80,9 @@ html,body{
 ===================================================== */
 
 #hud{
+
     position:fixed;
+
     inset:0;
 
     pointer-events:none;
@@ -84,26 +94,32 @@ html,body{
 ===================================================== */
 
 #title{
+
     position:absolute;
 
     top:18px;
+
     left:50%;
 
-    transform:translateX(-50%);
+    transform:
+        translateX(-50%);
 
     text-align:center;
 
     text-shadow:
-        0 0 8px #00c8ff,
+        0 0 8px #00d9ff,
         0 0 20px #008cff;
 }
 
 #title b{
+
     font-size:24px;
+
     letter-spacing:5px;
 }
 
 #title small{
+
     display:block;
 
     margin-top:4px;
@@ -117,24 +133,27 @@ html,body{
 
 
 /* =====================================================
-   ESQUINAS HUD
+   ESQUINAS
 ===================================================== */
 
 .corner{
+
     position:absolute;
 
-    width:65px;
-    height:65px;
+    width:60px;
+
+    height:60px;
 
     border-color:#00d9ff;
 
     filter:
         drop-shadow(
-            0 0 8px #00c8ff
+            0 0 8px #00cfff
         );
 }
 
 .tl{
+
     top:15px;
     left:15px;
 
@@ -143,6 +162,7 @@ html,body{
 }
 
 .tr{
+
     top:15px;
     right:15px;
 
@@ -151,6 +171,7 @@ html,body{
 }
 
 .bl{
+
     bottom:15px;
     left:15px;
 
@@ -159,6 +180,7 @@ html,body{
 }
 
 .br{
+
     bottom:15px;
     right:15px;
 
@@ -168,20 +190,20 @@ html,body{
 
 
 /* =====================================================
-   ESCÁNER
+   LÍNEA DE ESCANEO
 ===================================================== */
 
 #scan{
+
     position:absolute;
 
-    left:0;
-
     width:100%;
+
     height:2px;
 
     background:#00d9ff;
 
-    opacity:.25;
+    opacity:.22;
 
     box-shadow:
         0 0 15px #00d9ff;
@@ -207,14 +229,15 @@ html,body{
    PANEL JARVIS
 ===================================================== */
 
-#jarvisPanel{
+#jarvis{
 
     position:absolute;
 
-    left:18px;
-    bottom:18px;
+    left:15px;
 
-    width:280px;
+    bottom:15px;
+
+    width:285px;
 
     padding:12px;
 
@@ -226,13 +249,13 @@ html,body{
 
     box-shadow:
         0 0 20px
-        rgba(0,180,255,.25);
+        rgba(0,190,255,.25);
 
     backdrop-filter:
         blur(5px);
 }
 
-#jarvisTitle{
+#jarvisName{
 
     font-size:14px;
 
@@ -245,11 +268,46 @@ html,body{
 
     margin-top:6px;
 
+    min-height:32px;
+
     font-size:11px;
 
-    line-height:1.4;
+    line-height:1.5;
+}
 
-    min-height:30px;
+
+/* =====================================================
+   BOTÓN MICRO
+===================================================== */
+
+#voiceButton{
+
+    pointer-events:auto;
+
+    margin-top:8px;
+
+    padding:10px 14px;
+
+    color:#00d9ff;
+
+    background:
+        rgba(0,40,70,.9);
+
+    border:
+        1px solid #00d9ff;
+
+    border-radius:5px;
+
+    font-family:monospace;
+
+    font-size:11px;
+}
+
+#voiceButton:active{
+
+    background:
+        rgba(0,120,190,.8);
+
 }
 
 
@@ -261,60 +319,23 @@ html,body{
 
     position:absolute;
 
-    right:18px;
-    bottom:18px;
+    right:15px;
+
+    bottom:15px;
 
     text-align:right;
 
-    font-size:11px;
+    font-size:10px;
 
-    line-height:1.7;
+    line-height:1.8;
 
     text-shadow:
-        0 0 8px #00c8ff;
+        0 0 8px #00d9ff;
 }
 
 
 /* =====================================================
-   BOTÓN
-===================================================== */
-
-button{
-
-    pointer-events:auto;
-
-    margin-top:8px;
-
-    padding:9px 13px;
-
-    background:
-        rgba(0,40,70,.85);
-
-    border:
-        1px solid #00d9ff;
-
-    border-radius:5px;
-
-    color:#00d9ff;
-
-    font-family:monospace;
-
-    font-size:11px;
-
-    box-shadow:
-        0 0 10px
-        rgba(0,180,255,.3);
-}
-
-button:active{
-
-    background:
-        rgba(0,120,180,.7);
-}
-
-
-/* =====================================================
-   BOTÓN ACTIVAR
+   BOTÓN INICIAL
 ===================================================== */
 
 #start{
@@ -323,47 +344,57 @@ button:active{
 
     z-index:50;
 
-    left:50%;
     top:50%;
+    left:50%;
 
     transform:
         translate(-50%,-50%);
 
-    padding:18px 26px;
+    padding:18px 25px;
 
-    font-size:16px;
+    color:#00d9ff;
 
     background:
         rgba(0,10,25,.95);
 
+    border:
+        1px solid #00d9ff;
+
+    border-radius:6px;
+
+    font-family:monospace;
+
+    font-size:16px;
+
     box-shadow:
-        0 0 25px #008cff,
-        0 0 60px
-        rgba(0,150,255,.25);
+        0 0 25px #008cff;
 }
 
 
 /* =====================================================
-   RESPONSIVE
+   MÓVIL
 ===================================================== */
 
 @media(max-width:600px){
 
     #title b{
+
         font-size:18px;
     }
 
-    #jarvisPanel{
+    #jarvis{
+
+        width:235px;
 
         left:10px;
-        bottom:10px;
 
-        width:230px;
+        bottom:10px;
     }
 
     #status{
 
         right:10px;
+
         bottom:10px;
 
         font-size:9px;
@@ -383,19 +414,19 @@ button:active{
 =================================================== -->
 
 <video
-    id="camera"
-    autoplay
-    playsinline
-    muted>
+id="camera"
+autoplay
+playsinline
+muted>
 </video>
 
 
 <!-- ===================================================
-     CANVAS
+     CANVAS PARA LAS CAJAS
 =================================================== -->
 
 <canvas
-    id="detectionCanvas">
+id="canvas">
 </canvas>
 
 
@@ -408,8 +439,11 @@ button:active{
     <div id="scan"></div>
 
     <div class="corner tl"></div>
+
     <div class="corner tr"></div>
+
     <div class="corner bl"></div>
+
     <div class="corner br"></div>
 
 
@@ -424,21 +458,25 @@ button:active{
     </div>
 
 
-    <!-- JARVIS -->
+    <!-- PANEL JARVIS -->
 
-    <div id="jarvisPanel">
+    <div id="jarvis">
 
-        <div id="jarvisTitle">
+        <div id="jarvisName">
             JARVIS
         </div>
 
         <div id="message">
+
             Sistema preparado.
+
         </div>
 
         <button
-            id="voiceButton">
+        id="voiceButton">
+
             🎙 HABLAR CON JARVIS
+
         </button>
 
     </div>
@@ -464,7 +502,7 @@ button:active{
 
         IA:
         <span id="aiStatus">
-            CARGANDO
+            OFF
         </span>
 
         <br>
@@ -476,8 +514,8 @@ button:active{
 
         <br>
 
-        VOZ:
-        <span id="voiceStatus">
+        MICRÓFONO:
+        <span id="micStatus">
             OFF
         </span>
 
@@ -487,11 +525,13 @@ button:active{
 
 
 <!-- ===================================================
-     BOTÓN
+     ACTIVAR
 =================================================== -->
 
 <button id="start">
+
     ACTIVAR JARVIS
+
 </button>
 
 
@@ -499,12 +539,13 @@ button:active{
      TENSORFLOW
 =================================================== -->
 
-<script src=
-"https://cdn.jsdelivr.net/npm/@tensorflow/tfjs">
+<script
+src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs">
 </script>
 
-<script src=
-"https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd">
+
+<script
+src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd">
 </script>
 
 
@@ -515,124 +556,70 @@ button:active{
 ===================================================== */
 
 const video =
-    document.getElementById(
-        "camera"
-    );
+document.getElementById(
+    "camera"
+);
 
 const canvas =
-    document.getElementById(
-        "detectionCanvas"
-    );
+document.getElementById(
+    "canvas"
+);
 
 const ctx =
-    canvas.getContext("2d");
+canvas.getContext(
+    "2d"
+);
 
 const startButton =
-    document.getElementById(
-        "start"
-    );
+document.getElementById(
+    "start"
+);
+
+const voiceButton =
+document.getElementById(
+    "voiceButton"
+);
 
 const message =
-    document.getElementById(
-        "message"
-    );
-
-const objectCount =
-    document.getElementById(
-        "objectCount"
-    );
-
-const aiStatus =
-    document.getElementById(
-        "aiStatus"
-    );
+document.getElementById(
+    "message"
+);
 
 const cameraStatus =
-    document.getElementById(
-        "cameraStatus"
-    );
+document.getElementById(
+    "cameraStatus"
+);
 
-const voiceStatus =
-    document.getElementById(
-        "voiceStatus"
-    );
+const aiStatus =
+document.getElementById(
+    "aiStatus"
+);
+
+const objectCount =
+document.getElementById(
+    "objectCount"
+);
+
+const micStatus =
+document.getElementById(
+    "micStatus"
+);
 
 
 let model = null;
 
 let active = false;
 
-let detections = [];
+let objects = [];
 
 let detecting = false;
 
 
 /* =====================================================
-   ALTURAS DE REFERENCIA
+   NOMBRES
 ===================================================== */
 
-const objectHeights = {
-
-    person:1.70,
-
-    bicycle:1.05,
-
-    car:1.50,
-
-    motorcycle:1.10,
-
-    bus:3.20,
-
-    truck:2.50,
-
-    chair:.90,
-
-    couch:.80,
-
-    table:.75,
-
-    bottle:.25,
-
-    cup:.12,
-
-    laptop:.25,
-
-    tv:.70,
-
-    backpack:.45,
-
-    suitcase:.70,
-
-    dog:.60,
-
-    cat:.30,
-
-    horse:1.50,
-
-    cow:1.40,
-
-    sheep:.80,
-
-    bird:.25,
-
-    book:.25,
-
-    keyboard:.04,
-
-    cell_phone:.15,
-
-    microwave:.35,
-
-    refrigerator:1.70
-
-};
-
-
-/* =====================================================
-   NOMBRES EN ESPAÑOL
-===================================================== */
-
-const spanish = {
+const names = {
 
     person:"persona",
 
@@ -686,21 +673,7 @@ const spanish = {
 
     suitcase:"maleta",
 
-    frisbee:"frisbee",
-
-    skis:"esquís",
-
-    snowboard:"snowboard",
-
-    sports_ball:"pelota",
-
-    kite:"cometa",
-
-    skateboard:"skateboard",
-
     bottle:"botella",
-
-    wine_glass:"copa",
 
     cup:"taza",
 
@@ -780,28 +753,83 @@ const spanish = {
 
 
 /* =====================================================
-   REDIMENSIONAR CANVAS
+   ALTURAS DE REFERENCIA
 ===================================================== */
 
-function resizeCanvas(){
+const heights = {
+
+    person:1.70,
+
+    bicycle:1.05,
+
+    car:1.50,
+
+    motorcycle:1.10,
+
+    bus:3.20,
+
+    truck:2.50,
+
+    chair:.90,
+
+    couch:.80,
+
+    dining_table:.75,
+
+    bottle:.25,
+
+    cup:.12,
+
+    laptop:.25,
+
+    tv:.70,
+
+    backpack:.45,
+
+    suitcase:.70,
+
+    dog:.60,
+
+    cat:.30,
+
+    horse:1.50,
+
+    cow:1.40,
+
+    sheep:.80,
+
+    bird:.25,
+
+    book:.25,
+
+    cell_phone:.15,
+
+    refrigerator:1.70
+
+};
+
+
+/* =====================================================
+   AJUSTAR CANVAS
+===================================================== */
+
+function resize(){
 
     canvas.width =
-        video.videoWidth ||
-        window.innerWidth;
+        video.videoWidth;
 
     canvas.height =
-        video.videoHeight ||
-        window.innerHeight;
+        video.videoHeight;
 }
 
 window.addEventListener(
     "resize",
-    resizeCanvas
+    resize
 );
 
 
 /* =====================================================
-   ACTIVAR CÁMARA
+   CÁMARA
 ===================================================== */
 
 async function startCamera(){
@@ -809,25 +837,29 @@ async function startCamera(){
     try{
 
         const stream =
-            await navigator.mediaDevices
-            .getUserMedia({
+        await navigator
+        .mediaDevices
+        .getUserMedia({
 
-                video:{
-                    facingMode:{
-                        ideal:"environment"
-                    },
+            video:{
 
-                    width:{
-                        ideal:1280
-                    },
-
-                    height:{
-                        ideal:720
-                    }
+                facingMode:{
+                    ideal:"environment"
                 },
 
-                audio:false
-            });
+                width:{
+                    ideal:1280
+                },
+
+                height:{
+                    ideal:720
+                }
+
+            },
+
+            audio:false
+
+        });
 
 
         video.srcObject =
@@ -837,7 +869,7 @@ async function startCamera(){
         await video.play();
 
 
-        resizeCanvas();
+        resize();
 
 
         active = true;
@@ -852,7 +884,7 @@ async function startCamera(){
 
 
         message.textContent =
-            "Cámara activada. Iniciando inteligencia visual...";
+            "Cámara activada. Cargando IA...";
 
 
         loadAI();
@@ -864,17 +896,19 @@ async function startCamera(){
         console.error(error);
 
         message.textContent =
-            "No se pudo acceder a la cámara.";
+            "No se pudo activar la cámara.";
 
         alert(
-            "Permite el acceso a la cámara para utilizar JARVIS."
+            "Debes permitir el acceso a la cámara."
         );
+
     }
+
 }
 
 
 /* =====================================================
-   CARGAR IA
+   IA
 ===================================================== */
 
 async function loadAI(){
@@ -894,7 +928,7 @@ async function loadAI(){
 
 
         message.textContent =
-            "Inteligencia visual activada.";
+            "Visión artificial activada.";
 
 
         speak(
@@ -902,7 +936,7 @@ async function loadAI(){
         );
 
 
-        detectLoop();
+        detect();
 
     }
 
@@ -914,16 +948,18 @@ async function loadAI(){
             "ERROR";
 
         message.textContent =
-            "No se pudo cargar el sistema de inteligencia artificial.";
+            "Error cargando la inteligencia artificial.";
+
     }
+
 }
 
 
 /* =====================================================
-   DETECCIÓN
+   DETECTAR
 ===================================================== */
 
-async function detectLoop(){
+async function detect(){
 
     if(
         !active ||
@@ -932,7 +968,7 @@ async function detectLoop(){
     ){
 
         requestAnimationFrame(
-            detectLoop
+            detect
         );
 
         return;
@@ -944,21 +980,20 @@ async function detectLoop(){
 
     try{
 
-        detections =
+        objects =
             await model.detect(
                 video
             );
 
 
-        drawDetections(
-            detections
-        );
+        draw(objects);
 
     }
 
     catch(error){
 
         console.error(error);
+
     }
 
 
@@ -966,9 +1001,10 @@ async function detectLoop(){
 
 
     setTimeout(
-        detectLoop,
-        150
+        detect,
+        200
     );
+
 }
 
 
@@ -976,29 +1012,15 @@ async function detectLoop(){
    DISTANCIA
 ===================================================== */
 
-function estimateDistance(
+function distance(
     object,
     pixelHeight
 ){
 
     const realHeight =
-        objectHeights[object]
-        || .50;
+        heights[object]
+        || .5;
 
-
-    if(
-        pixelHeight <= 0
-    ){
-
-        return 0;
-    }
-
-
-    /*
-       Estimación visual.
-
-       NO es LiDAR ni medición real.
-    */
 
     const focal =
         Math.max(
@@ -1007,23 +1029,23 @@ function estimateDistance(
         );
 
 
-    let distance =
+    let d =
         realHeight *
         focal /
         pixelHeight;
 
 
-    distance =
+    d =
         Math.max(
             .2,
             Math.min(
                 30,
-                distance
+                d
             )
         );
 
 
-    return distance;
+    return d;
 }
 
 
@@ -1031,10 +1053,10 @@ function estimateDistance(
    ALTURA
 ===================================================== */
 
-function estimateHeight(
+function objectHeight(
     object,
     pixelHeight,
-    distance
+    d
 ){
 
     const focal =
@@ -1044,59 +1066,32 @@ function estimateHeight(
         );
 
 
-    let height =
+    let h =
         pixelHeight *
-        distance /
+        d /
         focal;
 
 
-    const reference =
-        objectHeights[object]
-        || .50;
+    h =
+        Math.max(
+            .03,
+            Math.min(
+                5,
+                h
+            )
+        );
 
 
-    /*
-       Para evitar resultados
-       completamente absurdos.
-    */
-
-    if(
-        object === "person"
-    ){
-
-        height =
-            Math.max(
-                1.0,
-                Math.min(
-                    2.3,
-                    height
-                )
-            );
-    }
-
-    else{
-
-        height =
-            Math.max(
-                .03,
-                Math.min(
-                    5,
-                    height
-                )
-            );
-    }
-
-
-    return height;
+    return h;
 }
 
 
 /* =====================================================
-   DIBUJAR CAJAS
+   DIBUJAR
 ===================================================== */
 
-function drawDetections(
-    objects
+function draw(
+    predictions
 ){
 
     ctx.clearRect(
@@ -1108,53 +1103,61 @@ function drawDetections(
 
 
     objectCount.textContent =
-        objects.length;
+        predictions.length;
 
 
-    objects.forEach(
+    predictions.forEach(
         function(obj){
 
-            const [
-                x,
-                y,
-                w,
-                h
-            ] = obj.bbox;
+            const x =
+                obj.bbox[0];
+
+            const y =
+                obj.bbox[1];
+
+            const w =
+                obj.bbox[2];
+
+            const h =
+                obj.bbox[3];
 
 
-            const distance =
-                estimateDistance(
+            const d =
+                distance(
                     obj.class,
                     h
                 );
 
 
-            const height =
-                estimateHeight(
+            const realH =
+                objectHeight(
                     obj.class,
                     h,
-                    distance
+                    d
                 );
 
 
             const name =
-                spanish[obj.class]
-                || obj.class;
+                names[obj.class]
+                ||
+                obj.class;
 
 
-            /* -------------------------------------
-               CAJA
-            ------------------------------------- */
+            /* -----------------------------------------
+               CAJA PRINCIPAL
+            ----------------------------------------- */
 
             ctx.strokeStyle =
                 "#00d9ff";
 
-            ctx.lineWidth = 3;
-
-            ctx.shadowBlur = 15;
+            ctx.lineWidth =
+                3;
 
             ctx.shadowColor =
-                "#00bfff";
+                "#00d9ff";
+
+            ctx.shadowBlur =
+                15;
 
 
             ctx.strokeRect(
@@ -1165,178 +1168,74 @@ function drawDetections(
             );
 
 
-            ctx.shadowBlur = 0;
+            ctx.shadowBlur =
+                0;
 
 
-            /* -------------------------------------
-               ESQUINAS DE LA CAJA
-            ------------------------------------- */
-
-            const corner = 15;
-
-
-            ctx.strokeStyle =
-                "#ffffff";
-
-            ctx.lineWidth = 2;
-
-
-            // esquina superior izquierda
-
-            ctx.beginPath();
-
-            ctx.moveTo(
-                x,
-                y + corner
-            );
-
-            ctx.lineTo(
-                x,
-                y
-            );
-
-            ctx.lineTo(
-                x + corner,
-                y
-            );
-
-            ctx.stroke();
-
-
-            // esquina superior derecha
-
-            ctx.beginPath();
-
-            ctx.moveTo(
-                x+w-corner,
-                y
-            );
-
-            ctx.lineTo(
-                x+w,
-                y
-            );
-
-            ctx.lineTo(
-                x+w,
-                y+corner
-            );
-
-            ctx.stroke();
-
-
-            // esquina inferior izquierda
-
-            ctx.beginPath();
-
-            ctx.moveTo(
-                x,
-                y+h-corner
-            );
-
-            ctx.lineTo(
-                x,
-                y+h
-            );
-
-            ctx.lineTo(
-                x+corner,
-                y+h
-            );
-
-            ctx.stroke();
-
-
-            // esquina inferior derecha
-
-            ctx.beginPath();
-
-            ctx.moveTo(
-                x+w-corner,
-                y+h
-            );
-
-            ctx.lineTo(
-                x+w,
-                y+h
-            );
-
-            ctx.lineTo(
-                x+w,
-                y+h-corner
-            );
-
-            ctx.stroke();
-
-
-            /* -------------------------------------
-               PANEL DE INFORMACIÓN
-            ------------------------------------- */
-
-            const panelHeight =
-                82;
-
+            /* -----------------------------------------
+               PANEL
+            ----------------------------------------- */
 
             const panelWidth =
                 Math.max(
                     180,
                     Math.min(
-                        260,
+                        250,
                         w
                     )
                 );
 
 
-            let panelY =
-                y - panelHeight - 5;
+            const panelHeight =
+                78;
+
+
+            let py =
+                y -
+                panelHeight -
+                5;
 
 
             if(
-                panelY < 5
+                py < 5
             ){
 
-                panelY =
+                py =
                     y + 5;
+
             }
 
 
-            /*
-               Fondo
-            */
-
             ctx.fillStyle =
-                "rgba(0,15,30,.88)";
+                "rgba(0,15,30,.90)";
 
 
             ctx.fillRect(
                 x,
-                panelY,
+                py,
                 panelWidth,
                 panelHeight
             );
 
-
-            /*
-               Borde
-            */
 
             ctx.strokeStyle =
                 "#00d9ff";
 
-            ctx.lineWidth = 1;
+            ctx.lineWidth =
+                1;
 
 
             ctx.strokeRect(
                 x,
-                panelY,
+                py,
                 panelWidth,
                 panelHeight
             );
 
 
-            /* -------------------------------------
+            /* -----------------------------------------
                TEXTO
-            ------------------------------------- */
+            ----------------------------------------- */
 
             ctx.fillStyle =
                 "#00eaff";
@@ -1348,8 +1247,8 @@ function drawDetections(
 
             ctx.fillText(
                 name.toUpperCase(),
-                x + 7,
-                panelY + 17
+                x+7,
+                py+17
             );
 
 
@@ -1362,42 +1261,42 @@ function drawDetections(
                 (obj.score*100)
                 .toFixed(0) +
                 "%",
-                x + 7,
-                panelY + 34
+                x+7,
+                py+34
             );
 
 
             ctx.fillText(
                 "DISTANCIA: " +
-                distance.toFixed(1) +
+                d.toFixed(1) +
                 " m",
-                x + 7,
-                panelY + 50
+                x+7,
+                py+50
             );
 
 
             ctx.fillText(
                 "ALTURA EST.: " +
-                height.toFixed(2) +
+                realH.toFixed(2) +
                 " m",
-                x + 7,
-                panelY + 66
+                x+7,
+                py+66
             );
 
         }
     );
+
 }
 
 
 /* =====================================================
-   VOZ
+   VOZ DE JARVIS
 ===================================================== */
 
 function speak(text){
 
     if(
-        !("speechSynthesis"
-        in window)
+        !window.speechSynthesis
     ){
 
         return;
@@ -1407,36 +1306,32 @@ function speak(text){
     speechSynthesis.cancel();
 
 
-    const utterance =
+    const voice =
         new SpeechSynthesisUtterance(
             text
         );
 
 
-    utterance.lang =
+    voice.lang =
         "es-ES";
 
 
-    utterance.rate =
-        .90;
+    voice.rate =
+        .9;
 
 
-    /*
-       Voz más grave para darle
-       sensación de asistente.
-    */
-
-    utterance.pitch =
-        .72;
+    voice.pitch =
+        .75;
 
 
-    utterance.volume =
+    voice.volume =
         1;
 
 
     speechSynthesis.speak(
-        utterance
+        voice
     );
+
 }
 
 
@@ -1446,15 +1341,33 @@ function speak(text){
 
 function listen(){
 
+    /*
+       Safari/iOS utiliza normalmente
+       webkitSpeechRecognition cuando
+       está disponible.
+    */
+
     const Recognition =
         window.SpeechRecognition ||
         window.webkitSpeechRecognition;
 
 
-    if(!Recognition){
+    if(
+        !Recognition
+    ){
+
+        micStatus.textContent =
+            "NO DISP.";
+
 
         message.textContent =
-            "El navegador no permite reconocimiento de voz.";
+            "El reconocimiento de voz no está disponible en este navegador.";
+
+
+        speak(
+            "El reconocimiento de voz no está disponible."
+        );
+
 
         return;
     }
@@ -1476,63 +1389,150 @@ function listen(){
         false;
 
 
-    voiceStatus.textContent =
+    recognition.maxAlternatives =
+        1;
+
+
+    micStatus.textContent =
         "ESCUCHANDO";
 
 
     message.textContent =
-        "Te escucho.";
+        "Te escucho...";
 
 
-    speak(
-        "Te escucho."
+    /*
+       Esperamos un pequeño momento
+       antes de escuchar.
+    */
+
+    setTimeout(
+        function(){
+
+            try{
+
+                recognition.start();
+
+            }
+
+            catch(error){
+
+                console.log(error);
+
+            }
+
+        },
+        150
     );
 
 
     recognition.onresult =
         function(event){
 
-            const command =
-                event.results[0][0]
+            const text =
+                event
+                .results[0][0]
                 .transcript
                 .toLowerCase();
 
 
-            voiceStatus.textContent =
+            console.log(
+                "Usuario:",
+                text
+            );
+
+
+            micStatus.textContent =
                 "ON";
 
 
             processCommand(
-                command
+                text
             );
+
+        };
+
+
+    recognition.onspeechstart =
+        function(){
+
+            micStatus.textContent =
+                "ESCUCHANDO";
+
+        };
+
+
+    recognition.onspeechend =
+        function(){
+
+            micStatus.textContent =
+                "PROCESANDO";
+
         };
 
 
     recognition.onerror =
-        function(){
+        function(event){
 
-            voiceStatus.textContent =
+            console.log(
+                "Micrófono:",
+                event.error
+            );
+
+
+            micStatus.textContent =
                 "ERROR";
 
-            message.textContent =
-                "No pude entenderte.";
+
+            if(
+                event.error ===
+                "not-allowed"
+            ){
+
+                message.textContent =
+                    "Permiso de micrófono bloqueado. Permite el micrófono en Safari.";
+
+            }
+
+            else if(
+                event.error ===
+                "network"
+            ){
+
+                message.textContent =
+                    "Safari no pudo conectar con el servicio de reconocimiento de voz.";
+
+            }
+
+            else{
+
+                message.textContent =
+                    "No pude escuchar correctamente.";
+
+            }
+
         };
 
 
     recognition.onend =
         function(){
 
-            voiceStatus.textContent =
-                "OFF";
+            if(
+                micStatus.textContent !==
+                "ERROR"
+            ){
+
+                micStatus.textContent =
+                    "OFF";
+            }
+
         };
 
-
-    recognition.start();
 }
 
 
 /* =====================================================
-   COMANDOS JARVIS
+   PROCESAR COMANDO
 ===================================================== */
 
 function processCommand(
@@ -1540,14 +1540,11 @@ function processCommand(
 ){
 
     console.log(
-        "Comando:",
         command
     );
 
 
-    /* -----------------------------------------------
-       SALUDO
-    ----------------------------------------------- */
+    /* SALUDO */
 
     if(
         command.includes("hola")
@@ -1555,21 +1552,15 @@ function processCommand(
         command.includes("jarvis")
     ){
 
-        const response =
-            "Hola. Todos los sistemas funcionan correctamente.";
-
-        message.textContent =
-            response;
-
-        speak(response);
+        respond(
+            "Hola. Todos los sistemas funcionan correctamente."
+        );
 
         return;
     }
 
 
-    /* -----------------------------------------------
-       QUÉ VES
-    ----------------------------------------------- */
+    /* QUÉ VES */
 
     if(
         command.includes("qué ves")
@@ -1583,15 +1574,13 @@ function processCommand(
         command.includes("describe")
     ){
 
-        describeScene();
+        describe();
 
         return;
     }
 
 
-    /* -----------------------------------------------
-       CUÁNTOS OBJETOS
-    ----------------------------------------------- */
+    /* CUÁNTOS */
 
     if(
         command.includes("cuántos")
@@ -1599,23 +1588,17 @@ function processCommand(
         command.includes("cuantos")
     ){
 
-        const response =
-            "Detecto " +
-            detections.length +
-            " objetos.";
-
-        message.textContent =
-            response;
-
-        speak(response);
+        respond(
+            "Actualmente detecto " +
+            objects.length +
+            " objetos."
+        );
 
         return;
     }
 
 
-    /* -----------------------------------------------
-       ESTADO
-    ----------------------------------------------- */
+    /* ESTADO */
 
     if(
         command.includes("estado")
@@ -1623,41 +1606,29 @@ function processCommand(
         command.includes("sistemas")
     ){
 
-        const response =
-            "Sistemas operativos. " +
-            "Cámara activa. " +
-            "Inteligencia visual funcionando.";
-
-        message.textContent =
-            response;
-
-        speak(response);
+        respond(
+            "Todos los sistemas están operativos. Cámara e inteligencia visual activadas."
+        );
 
         return;
     }
 
 
-    /* -----------------------------------------------
-       OBJETO MÁS CERCANO
-    ----------------------------------------------- */
+    /* MÁS CERCANO */
 
     if(
         command.includes("más cerca")
         ||
         command.includes("mas cerca")
-        ||
-        command.includes("cerca")
     ){
 
-        closestObject();
+        closest();
 
         return;
     }
 
 
-    /* -----------------------------------------------
-       AYUDA
-    ----------------------------------------------- */
+    /* AYUDA */
 
     if(
         command.includes("ayuda")
@@ -1665,32 +1636,36 @@ function processCommand(
         command.includes("comandos")
     ){
 
-        const response =
-            "Puedes preguntarme qué veo, " +
-            "cuántos objetos hay, " +
-            "cuál está más cerca o decir estado.";
-
-        message.textContent =
-            response;
-
-        speak(response);
+        respond(
+            "Puedes preguntarme qué veo, cuántos objetos detecto, cuál está más cerca o cuál es el estado del sistema."
+        );
 
         return;
     }
 
 
-    /* -----------------------------------------------
-       NO RECONOCIDO
-    ----------------------------------------------- */
+    /* NO ENTENDIDO */
 
-    const response =
-        "No tengo una respuesta configurada " +
-        "para ese comando.";
+    respond(
+        "He escuchado tu comando, pero todavía no tengo una respuesta configurada para esa pregunta."
+    );
+
+}
+
+
+/* =====================================================
+   RESPONDER
+===================================================== */
+
+function respond(text){
 
     message.textContent =
-        response;
+        text;
 
-    speak(response);
+    speak(
+        text
+    );
+
 }
 
 
@@ -1698,119 +1673,112 @@ function processCommand(
    DESCRIBIR ESCENA
 ===================================================== */
 
-function describeScene(){
+function describe(){
 
     if(
-        detections.length === 0
+        objects.length === 0
     ){
 
-        const response =
-            "No detecto objetos en este momento.";
-
-        message.textContent =
-            response;
-
-        speak(response);
+        respond(
+            "No detecto ningún objeto en este momento."
+        );
 
         return;
     }
 
 
-    let response =
+    let text =
         "Detecto " +
-        detections.length +
+        objects.length +
         " objetos. ";
 
 
-    const used = {};
+    const found = {};
 
 
-    detections
+    objects
     .slice(0,6)
     .forEach(
         function(obj){
 
             const name =
-                spanish[obj.class]
-                || obj.class;
+                names[obj.class]
+                ||
+                obj.class;
 
 
             if(
-                !used[name]
+                !found[name]
             ){
 
-                response +=
+                text +=
                     name +
                     ". ";
 
-                used[name] = true;
+                found[name] =
+                    true;
             }
 
         }
     );
 
 
-    message.textContent =
-        response;
+    respond(
+        text
+    );
 
-    speak(response);
 }
 
 
 /* =====================================================
-   OBJETO MÁS CERCANO
+   MÁS CERCANO
 ===================================================== */
 
-function closestObject(){
+function closest(){
 
     if(
-        detections.length === 0
+        objects.length === 0
     ){
 
-        const response =
-            "No detecto ningún objeto.";
-
-        message.textContent =
-            response;
-
-        speak(response);
+        respond(
+            "No detecto objetos."
+        );
 
         return;
     }
 
 
-    let closest =
-        detections[0];
+    let nearest =
+        objects[0];
 
 
-    let closestDistance =
-        estimateDistance(
-            closest.class,
-            closest.bbox[3]
+    let nearestDistance =
+        distance(
+            nearest.class,
+            nearest.bbox[3]
         );
 
 
-    detections
-    .forEach(
+    objects.forEach(
         function(obj){
 
-            const distance =
-                estimateDistance(
+            const d =
+                distance(
                     obj.class,
                     obj.bbox[3]
                 );
 
 
             if(
-                distance <
-                closestDistance
+                d <
+                nearestDistance
             ){
 
-                closest =
+                nearest =
                     obj;
 
-                closestDistance =
-                    distance;
+                nearestDistance =
+                    d;
             }
 
         }
@@ -1818,23 +1786,19 @@ function closestObject(){
 
 
     const name =
-        spanish[closest.class]
-        || closest.class;
+        names[nearest.class]
+        ||
+        nearest.class;
 
 
-    const response =
-        "El objeto que parece estar " +
-        "más cerca es " +
+    respond(
+        "El objeto que parece estar más cerca es " +
         name +
         ", aproximadamente a " +
-        closestDistance.toFixed(1) +
-        " metros.";
+        nearestDistance.toFixed(1) +
+        " metros."
+    );
 
-
-    message.textContent =
-        response;
-
-    speak(response);
 }
 
 
@@ -1842,18 +1806,12 @@ function closestObject(){
    BOTONES
 ===================================================== */
 
-startButton.addEventListener(
-    "click",
-    startCamera
-);
+startButton.onclick =
+    startCamera;
 
 
-document.getElementById(
-    "voiceButton"
-).addEventListener(
-    "click",
-    listen
-);
+voiceButton.onclick =
+    listen;
 
 
 /* =====================================================
@@ -1861,7 +1819,7 @@ document.getElementById(
 ===================================================== */
 
 console.log(
-    "JARVIS Vision System cargado."
+    "JARVIS VISION ONLINE"
 );
 
 </script>
